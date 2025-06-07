@@ -1,2 +1,2 @@
-# wathes
+# watches
 SoftUni Angular Project
