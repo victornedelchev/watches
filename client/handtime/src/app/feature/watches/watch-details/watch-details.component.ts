@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+
 import { IWatch } from 'src/app/core/interfaces/watch';
 import { WatchService } from 'src/app/core/watch.service';
 

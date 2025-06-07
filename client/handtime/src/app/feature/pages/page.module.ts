@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
+import { ConstacUsComponent } from './constac-us/constac-us.component';
 
 @NgModule({
-  declarations: [HomeComponent, AboutComponent],
+  declarations: [HomeComponent, AboutComponent, TestimonialComponent, ConstacUsComponent],
   imports: [CommonModule, RouterModule],
   exports: [HomeComponent, AboutComponent],
 })
