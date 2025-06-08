@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     TestimonialComponent,
     ContactUsComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SharedModule],
   exports: [HomeComponent, AboutComponent],
 })
 export class PageModule {}

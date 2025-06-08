@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { PageModule } from './feature/pages/page.module';
 import { WatchesModule } from './feature/watches/watches.module';
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     PageModule,
     WatchesModule,
     AuthModule,
+    SharedModule,
     HttpClientModule,
     FontAwesomeModule,
   ],
