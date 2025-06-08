@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PageModule } from './feature/pages/page.module';
 import { WatchesModule } from './feature/watches/watches.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { WatchesModule } from './feature/watches/watches.module';
     CoreModule,
     PageModule,
     WatchesModule,
+    AuthModule,
     HttpClientModule,
   ],
   providers: [],

@@ -4,10 +4,15 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
-import { ConstacUsComponent } from './constac-us/constac-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
-  declarations: [HomeComponent, AboutComponent, TestimonialComponent, ConstacUsComponent],
+  declarations: [
+    HomeComponent,
+    AboutComponent,
+    TestimonialComponent,
+    ContactUsComponent,
+  ],
   imports: [CommonModule, RouterModule],
   exports: [HomeComponent, AboutComponent],
 })
