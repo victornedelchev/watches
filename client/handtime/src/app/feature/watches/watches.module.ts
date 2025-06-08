@@ -5,9 +5,10 @@ import { WatchesRoutingModule } from './watches-routing-module';
 import { WatchListItemComponent } from './watch-list-item/watch-list-item.component';
 import { RouterModule } from '@angular/router';
 import { WatchDetailsComponent } from './watch-details/watch-details.component';
+import { AddWatchComponent } from './add-watch/add-watch.component';
 
 @NgModule({
-  declarations: [WatchListComponent, WatchListItemComponent, WatchDetailsComponent],
+  declarations: [WatchListComponent, WatchListItemComponent, WatchDetailsComponent, AddWatchComponent],
   imports: [CommonModule, RouterModule],
   exports: [WatchListComponent, WatchesRoutingModule],
 })
