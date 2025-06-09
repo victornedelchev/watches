@@ -11,12 +11,24 @@
         <fa-icon [icon]="faEnvelope"></fa-icon>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Password" required />
-        <fa-icon [icon]="faEye"></fa-icon>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          required
+        />
+        <span (click)="viewPass()">
+          <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+        </span>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Repeat password" required />
-        <fa-icon [icon]="faEye"></fa-icon>
+        <input
+          [type]="showRePassword ? 'text' : 'password'"
+          placeholder="Repeat password"
+          required
+        />
+        <span (click)="viewRePass()">
+          <fa-icon [icon]="showRePassword ? faEye : faEyeSlash"></fa-icon>
+        </span>
       </div>
       <div class="remember-forgot">
         <label><input type="checkbox" />Remember me</label>

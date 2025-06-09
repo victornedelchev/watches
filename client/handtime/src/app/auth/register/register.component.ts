@@ -16,10 +16,20 @@ export class RegisterComponent implements OnInit {
   faEnvelope = faEnvelope;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
+  showPassword: boolean = false;
+  showRePassword: boolean = false;
 
   constructor(private titleService: Title) {}
 
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');
+  }
+
+  viewPass(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  viewRePass(): void {
+    this.showRePassword = !this.showRePassword;
   }
 }
