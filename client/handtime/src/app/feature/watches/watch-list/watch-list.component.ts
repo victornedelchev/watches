@@ -10,7 +10,7 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class WatchListComponent implements OnInit {
   watchList: IWatch[] = [];
-  isLoading = true;
+  isLoading: boolean = true;
 
   constructor(
     private titleService: Title,
