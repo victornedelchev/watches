@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/user.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent implements OnInit {
   faUser = faUser;
   faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   constructor(
     private titleService: Title,
@@ -28,4 +30,6 @@ export class LoginComponent implements OnInit {
     this.userService.login();
     this.router.navigate(['/home']);
   }
+
+  
 }
