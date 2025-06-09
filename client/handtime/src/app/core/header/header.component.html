@@ -53,12 +53,9 @@
           <li class="nav-item" *ngIf="isLogged">WELCOME VICTOR</li>
           <li class="nav-item" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
-        <div class="user_optio_box">
+        <div class="user_optio_box" *ngIf="isLogged">
           <a routerLink="/profile">
             <i class="fa fa-user" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           </a>
         </div>
       </div>
