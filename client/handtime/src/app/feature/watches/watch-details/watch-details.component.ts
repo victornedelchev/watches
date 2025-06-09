@@ -24,7 +24,7 @@ export class WatchDetailsComponent implements OnInit {
 
     const watchId = this.activatedRoute.snapshot.params['_id'];
 
-    this.watchService.loadWatchById(watchId).subscribe({
+    this.watchService.loadWatchById$(watchId).subscribe({
       next: (data: IWatch) => {
         this.watch = data;
       },

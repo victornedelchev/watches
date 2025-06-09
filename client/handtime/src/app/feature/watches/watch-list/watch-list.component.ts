@@ -19,7 +19,7 @@ export class WatchListComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Products Page');
 
-    this.watchService.loadWatchList().subscribe({
+    this.watchService.loadWatchList$().subscribe({
       next: (data: IWatch[]) => {
         this.watchList = data;
       },

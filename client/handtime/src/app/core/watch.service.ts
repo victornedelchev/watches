@@ -14,11 +14,11 @@ const apiUsl = environment.apiUrl;
 export class WatchService {
   constructor(private http: HttpClient) {}
 
-  loadWatchList(): Observable<IWatch[]> {
+  loadWatchList$(): Observable<IWatch[]> {
     return this.http.get<IWatch[]>(`${apiUsl}/watches`);
   }
 
-  loadWatchById(id: string): Observable<IWatch> {
+  loadWatchById$(id: string): Observable<IWatch> {
     return this.http.get<IWatch>(`${apiUsl}/watches/${id}`);
   }
 }
