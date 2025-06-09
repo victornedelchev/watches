@@ -8,7 +8,7 @@
       </div>
       <div class="input-box">
         <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" required />
-        <span (click)="viewPass()">
+        <span class="icon" (click)="viewPass()">
           <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
         </span>
       </div>

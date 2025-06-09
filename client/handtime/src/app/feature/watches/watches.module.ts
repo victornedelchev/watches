@@ -6,10 +6,11 @@ import { WatchListItemComponent } from './watch-list-item/watch-list-item.compon
 import { RouterModule } from '@angular/router';
 import { WatchDetailsComponent } from './watch-details/watch-details.component';
 import { AddWatchComponent } from './add-watch/add-watch.component';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [WatchListComponent, WatchListItemComponent, WatchDetailsComponent, AddWatchComponent],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SharedModule],
   exports: [WatchListComponent, WatchesRoutingModule],
 })
 export class WatchesModule {}

@@ -1,5 +1,8 @@
 <section class="product_section">
-  <div class="container">
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!isLoading" class="container">
     <div class="product_heading">
       <h2>Top Sale Watches</h2>
     </div>
@@ -11,9 +14,6 @@
     </div>
     <div *ngIf="watchList.length === 0">
       <p className="no-watches">No watches added yet!</p>
-    </div>
-    <div *ngIf="!watchList">
-      <app-loader></app-loader>
     </div>
   </div>
 </section>

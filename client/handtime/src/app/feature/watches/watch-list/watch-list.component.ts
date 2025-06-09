@@ -10,6 +10,7 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class WatchListComponent implements OnInit {
   watchList: IWatch[] = [];
+  isLoading = true;
 
   constructor(
     private titleService: Title,
@@ -21,9 +22,11 @@ export class WatchListComponent implements OnInit {
 
     this.watchService.loadWatchList$().subscribe({
       next: (data: IWatch[]) => {
+        this.isLoading = false;
         this.watchList = data;
       },
       error: (err) => {
+        this.isLoading = false;
         console.error('Error loading watches', err);
       },
     });
