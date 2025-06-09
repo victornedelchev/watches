@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   faUser = faUser;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
+  showPassword = false;
 
   constructor(
     private titleService: Title,
@@ -31,5 +32,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  
+  viewPass(): void {
+    this.showPassword = !this.showPassword;
+  }
 }
