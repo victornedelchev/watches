@@ -19,33 +19,37 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item" [routerLinkActive]="'active'">
             <a class="nav-link" routerLink="/home"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="'active'">
             <a class="nav-link" routerLink="/about"> About</a>
           </li>
-          <li class="nav-item">
+          <li
+            class="nav-item"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <a class="nav-link" routerLink="/watches">Products</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="'active'">
             <a class="nav-link" routerLink="/testimonial">Testimonial</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="'active'">
             <a class="nav-link" routerLink="/contact">Contact Us</a>
           </li>
-          <li class="nav-item" *ngIf="!isLogged">
+          <li class="nav-item" [routerLinkActive]="'active'" *ngIf="!isLogged">
             <a class="nav-link" routerLink="/login">Login</a>
           </li>
-          <li class="nav-item" *ngIf="!isLogged">
+          <li class="nav-item" [routerLinkActive]="'active'" *ngIf="!isLogged">
             <a class="nav-link" routerLink="/register">Register</a>
           </li>
-           <li class="nav-item" *ngIf="isLogged">
+          <li class="nav-item" [routerLinkActive]="'active'" *ngIf="isLogged">
             <a class="nav-link" routerLink="/watches/add">Add watch</a>
           </li>
-          <li class="nav-item" *ngIf="isLogged">
+          <li class="nav-item" [routerLinkActive]="'active'" *ngIf="isLogged">
             <a class="nav-link" routerLink="#" (click)="logoutHandler()"
               >Logout</a
             >
@@ -53,7 +57,11 @@
           <li class="nav-item" *ngIf="isLogged">WELCOME VICTOR</li>
           <li class="nav-item" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
-        <div class="user_optio_box" *ngIf="isLogged">
+        <div
+          class="user_optio_box"
+          [routerLinkActive]="'active'"
+          *ngIf="isLogged"
+        >
           <a routerLink="/profile">
             <i class="fa fa-user" aria-hidden="true"></i>
           </a>
