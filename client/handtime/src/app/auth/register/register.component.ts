@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
       password: this.passwordControl,
       rePassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
         passwordMismatch(this.passwordControl),
       ]),
     }),

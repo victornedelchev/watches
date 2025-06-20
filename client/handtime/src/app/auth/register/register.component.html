@@ -120,6 +120,10 @@
         <div class="input-box">
           <input
             [type]="showRePassword ? 'text' : 'password'"
+            [class.input-error]="
+              passwordGroup.controls['rePassword'].touched &&
+              passwordGroup.controls['rePassword'].invalid
+            "
             placeholder="Repeat password"
             name="rePassword"
             formControlName="rePassword"
@@ -137,7 +141,15 @@
         "
       >
         <p
-          *ngIf="passwordGroup.controls['rePassword'].errors?.['passwordsNotMatch']"
+          *ngIf="passwordGroup.controls['rePassword'].errors?.['required']"
+          class="error-message"
+        >
+          Repeat Password is required!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          *ngIf="!passwordGroup.controls['rePassword'].errors?.['required'] 
+          && passwordGroup.controls['rePassword'].errors?.['passwordsNotMatch']"
           class="error-message"
         >
           Repeat Password does not match password!
