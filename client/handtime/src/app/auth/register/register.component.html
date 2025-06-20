@@ -1,40 +1,160 @@
 <div class="register-container">
   <div class="wrapper">
-    <form action="">
+    <form
+      class="register"
+      [formGroup]="registerFormGroup"
+      (ngSubmit)="onSubmit()"
+    >
       <h1>Register</h1>
       <div class="input-box">
-        <input type="text" placeholder="Username" required />
+        <input
+          [class.input-error]="
+            registerFormGroup.controls['username'].touched &&
+            registerFormGroup.controls['username'].invalid
+          "
+          type="text"
+          name="username"
+          placeholder="Username"
+          formControlName="username"
+        />
         <fa-icon [icon]="faUser"></fa-icon>
       </div>
+
+      <ng-container
+        *ngIf="
+          registerFormGroup.controls['username'].touched &&
+          registerFormGroup.controls['username'].invalid
+        "
+      >
+        <p
+          class="error-message"
+          *ngIf="registerFormGroup.controls['username'].errors?.['required']"
+        >
+          Username is required!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          class="error-message"
+          *ngIf="registerFormGroup.controls['username'].errors?.['minlength']"
+        >
+          Username must be at least 3 characters long!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
       <div class="input-box">
-        <input type="email" placeholder="Email" required />
+        <input
+          [class.input-error]="
+            registerFormGroup.controls['email'].touched &&
+            registerFormGroup.controls['email'].invalid
+          "
+          type="email"
+          name="email"
+          placeholder="Email"
+          formControlName="email"
+        />
         <fa-icon [icon]="faEnvelope"></fa-icon>
       </div>
-      <div class="input-box">
-        <input
-          [type]="showPassword ? 'text' : 'password'"
-          placeholder="Password"
-          required
-        />
-        <span class="icon" (click)="viewPass()">
-          <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
-        </span>
+
+      <ng-container
+        *ngIf="
+          registerFormGroup.controls['email'].touched &&
+          registerFormGroup.controls['email'].invalid
+        "
+      >
+        <p
+          class="error-message"
+          *ngIf="registerFormGroup.controls['email'].errors?.['required']"
+        >
+          Email is required!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          class="error-message"
+          *ngIf="registerFormGroup.controls['email'].errors?.['invalidEmail']"
+        >
+          Email is not valid!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <div formGroupName="passwords">
+        <div class="input-box">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [class.input-error]="
+              passwordGroup.controls['password'].touched &&
+              passwordGroup.controls['password'].invalid
+            "
+            placeholder="Password"
+            name="password"
+            formControlName="password"
+          />
+          <span class="icon" (click)="viewPass()">
+            <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+          </span>
+        </div>
+
+        <ng-container
+          *ngIf="
+            passwordGroup.controls['password'].touched &&
+            passwordGroup.controls['password'].invalid
+          "
+        >
+          <p
+            class="error-message"
+            *ngIf="passwordGroup.controls['password'].errors?.['required']"
+          >
+            Password is required!
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          </p>
+          <p
+            class="error-message"
+            *ngIf="passwordGroup.controls['password'].errors?.['minlength']"
+          >
+            Password must be at least 6 characters long!
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          </p>
+        </ng-container>
+
+        <div class="input-box">
+          <input
+            [type]="showRePassword ? 'text' : 'password'"
+            placeholder="Repeat password"
+            name="rePassword"
+            formControlName="rePassword"
+          />
+          <span class="icon" (click)="viewRePass()">
+            <fa-icon [icon]="showRePassword ? faEye : faEyeSlash"></fa-icon>
+          </span>
+        </div>
       </div>
-      <div class="input-box">
-        <input
-          [type]="showRePassword ? 'text' : 'password'"
-          placeholder="Repeat password"
-          required
-        />
-        <span class="icon" (click)="viewRePass()">
-          <fa-icon [icon]="showRePassword ? faEye : faEyeSlash"></fa-icon>
-        </span>
-      </div>
+
+      <ng-container
+        *ngIf="
+          passwordGroup.controls['rePassword'].touched &&
+          passwordGroup.controls['rePassword'].invalid
+        "
+      >
+        <p
+          *ngIf="passwordGroup.controls['rePassword'].errors?.['passwordsNotMatch']"
+          class="error-message"
+        >
+          Repeat Password does not match password!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
       <div class="remember-forgot">
         <label><input type="checkbox" />Remember me</label>
         <a href="#">Forgot password?</a>
       </div>
-      <button type="submit" class="btn">Register</button>
+
+      <button [disabled]="registerFormGroup.invalid" class="btn">
+        Register
+      </button>
       <div class="register-link">
         <p>Don't have an account <a routerLink="/login">Login</a></p>
       </div>

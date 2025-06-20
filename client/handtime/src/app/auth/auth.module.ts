@@ -6,10 +6,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { AuthRouterModule } from './auth-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent],
-  imports: [CommonModule, RouterModule, AuthRouterModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AuthRouterModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+  ],
   exports: [LoginComponent, RegisterComponent, ProfileComponent],
 })
 export class AuthModule {}
