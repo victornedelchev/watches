@@ -1,22 +1,91 @@
 <div class="login-container">
   <div class="wrapper">
-    <form action="">
+    <form (ngSubmit)="loginHandler()" [formGroup]="loginFormGroup">
       <h1>Login</h1>
       <div class="input-box">
-        <input type="text" placeholder="Username" required />
-        <fa-icon [icon]="faUser"></fa-icon>
+        <input
+          type="email"
+          [class.input-error]="
+            loginFormGroup.controls['email'].touched &&
+            loginFormGroup.controls['email'].invalid
+          "
+          name="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <fa-icon [icon]="faEnvelope"></fa-icon>
       </div>
+
+      <ng-container
+        *ngIf="
+          loginFormGroup.controls['email'].touched &&
+          loginFormGroup.controls['email'].invalid
+        "
+      >
+        <p
+          *ngIf="loginFormGroup.controls['email'].errors?.['required']"
+          class="error-message"
+        >
+          Email is required!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          *ngIf="loginFormGroup.controls['email'].errors?.['invalidEmail']"
+          class="error-message"
+        >
+          Email is not valid!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
       <div class="input-box">
-        <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" required />
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [class.input-error]="
+            loginFormGroup.controls['password'].touched &&
+            loginFormGroup.controls['password'].invalid
+          "
+          placeholder="Password"
+          formControlName="password"
+        />
         <span class="icon" (click)="viewPass()">
           <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
         </span>
       </div>
+
+      <ng-container
+        *ngIf="
+          loginFormGroup.controls['password'].touched &&
+          loginFormGroup.controls['password'].invalid
+        "
+      >
+        <p
+          *ngIf="loginFormGroup.controls['password'].errors?.['required']"
+          class="error-message"
+        >
+          Password is required!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          *ngIf="loginFormGroup.controls['password'].errors?.['minlength']"
+          class="error-message"
+        >
+          Password must be at least 6 characters long!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon></p
+      ></ng-container>
+
       <div class="remember-forgot">
         <label><input type="checkbox" />Remember me</label>
         <a href="#">Forgot password?</a>
       </div>
-      <button type="submit" class="btn" (click)="loginHandler()">Login</button>
+      <button
+        [disabled]="loginFormGroup.invalid"
+        class="btn"
+        (click)="loginHandler()"
+      >
+        Login
+      </button>
       <div class="register-link">
         <p>Don't have an account <a routerLink="/register">Register</a></p>
       </div>

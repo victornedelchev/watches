@@ -2,9 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/user.service';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationTriangle,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { emailValidator } from '../register/utils';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +22,26 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  faUser = faUser;
+  faEnvelope = faEnvelope;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
+  faExclamationTriangle = faExclamationTriangle;
   showPassword = false;
+  errorMessage: string = '';
+
+  loginFormGroup: FormGroup = this.formBuilder.group({
+    email: new FormControl('', [Validators.required, emailValidator]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
   constructor(
     private titleService: Title,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginHandler(): void {
-    this.userService.login();
     this.router.navigate(['/home']);
   }
 

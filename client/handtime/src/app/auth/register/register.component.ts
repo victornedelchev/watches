@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import {
   faExclamationTriangle,
@@ -16,7 +17,6 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { emailValidator, passwordMismatch } from './utils';
 import { UserService } from 'src/app/core/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -76,14 +76,14 @@ export class RegisterComponent implements OnInit {
     this.showRePassword = !this.showRePassword;
   }
 
-  onSubmit(): void {
+  registerHandler(): void {
     this.errorMessage = '';
 
     const { username, email, passwords } = this.registerFormGroup.value;
 
     const body = {
-      username: username,
-      email: email,
+      username: username.trim(),
+      email: email.trim(),
       password: passwords.password,
     };
 

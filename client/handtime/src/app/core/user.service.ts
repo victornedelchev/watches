@@ -7,8 +7,13 @@ import { environment } from 'src/environments/environment.development';
 
 const API_URL = environment.API_URL;
 
-export interface CreateUserDto {
+export interface RegisterUserDto {
   username: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginUserDto {
   email: string;
   password: string;
 }
@@ -25,11 +30,13 @@ export class UserService {
 
   constructor(private storage: StorageService, private http: HttpClient) {}
 
-  register$(userData: CreateUserDto): Observable<IUser> {
+  register$(userData: RegisterUserDto): Observable<IUser> {
     return this.http.post<IUser>(`${API_URL}/register`, userData);
   }
 
-  login(): void {}
+  login(userData: LoginUserDto): Observable<IUser> {
+    return this.http.post<IUser>(`${API_URL}/login`, userData);
+  }
 
   logOut(): void {}
 }
