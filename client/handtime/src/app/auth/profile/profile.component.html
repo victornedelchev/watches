@@ -4,20 +4,20 @@
     <div class="profile-info">
       <div class="profile-item">
         <span class="label">Username:</span>
-        <span class="value">{{currentUser.username}}</span>
+        <span class="value">{{ currentUser.username }}</span>
       </div>
       <div class="profile-item">
         <span class="label">Email:</span>
-        <span class="value">{{currentUser.email}}</span>
+        <span class="value">{{ currentUser.email }}</span>
       </div>
       <div class="profile-item">
         <span class="label">Created At:</span>
-        <span class="value">{{currentUser._createdOn}}</span>
+        <span class="value">{{ currentUser._createdOn }}</span>
       </div>
 
-      <div class="profile-item">
+      <div *ngIf="currentUser._updatedOn" class="profile-item">
         <span class="label">Updated At:</span>
-        <span class="value">09.06.2025.</span>
+        <span class="value">{{ currentUser._updatedOn }}</span>
       </div>
     </div>
   </div>

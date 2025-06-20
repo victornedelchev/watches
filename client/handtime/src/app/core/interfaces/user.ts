@@ -3,5 +3,6 @@ export interface IUser {
   email: string;
   password: string;
   _createdOn: number;
+  _updatedOn?: number;
   _id: string;
 }

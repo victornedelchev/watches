@@ -33,14 +33,3 @@ export function passwordMismatch(passwordFormControl: AbstractControl) {
     return null;
   };
 }
-
-// export function passwordMismatch(
-//   passwordFormControl: AbstractControl
-// ): ValidationErrors | null {
-//   return (rePasswordFormControl: AbstractControl): ValidationErrors | null => {
-//     if (passwordFormControl.value !== rePasswordFormControl.value) {
-//       return { passwordsNotMatch: true };
-//     }
-//     return null;
-//   };
-// }
