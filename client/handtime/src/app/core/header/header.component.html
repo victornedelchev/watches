@@ -54,7 +54,9 @@
               >Logout</a
             >
           </li>
-          <li class="nav-item" *ngIf="isLogged">WELCOME VICTOR</li>
+          <li class="nav-item" *ngIf="isLogged">
+            WELCOME {{ currentUser.username | uppercase }}
+          </li>
           <li class="nav-item" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
         <div

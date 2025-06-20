@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { IUser } from '../interfaces/user';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   get isLogged(): boolean {
     return this.userService.isLogged;
+  }
+
+  get currentUser(): IUser {
+    return this.userService.currentUser;
   }
 
   constructor(private userService: UserService, private router: Router) {}

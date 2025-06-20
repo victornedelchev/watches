@@ -47,4 +47,10 @@ export class UserService {
   }
 
   logOut(): void {}
+
+  getUser$(): Observable<IUser> {
+    return this.http
+      .get<IUser>(`${API_URL}/me`)
+      .pipe(tap((user) => (this.currentUser = user)));
+  }
 }
