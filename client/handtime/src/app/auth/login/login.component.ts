@@ -49,7 +49,16 @@ export class LoginComponent implements OnInit {
   }
 
   loginHandler(): void {
-    this.router.navigate(['/home']);
+    this.errorMessage = '';
+    this.userService.login$(this.loginFormGroup.value).subscribe({
+      next: (user) => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Login failed. Please try again.';
+      },
+    })
+   
   }
 
   viewPass(): void {

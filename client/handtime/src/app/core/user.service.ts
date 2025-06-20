@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { IUser } from './interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
@@ -34,8 +34,16 @@ export class UserService {
     return this.http.post<IUser>(`${API_URL}/register`, userData);
   }
 
-  login(userData: LoginUserDto): Observable<IUser> {
-    return this.http.post<IUser>(`${API_URL}/login`, userData);
+  login$(userData: LoginUserDto): Observable<IUser> {
+    return this.http
+      .post<IUser>(`${API_URL}/login`, userData, {
+        observe: 'response',
+      })
+      .pipe(
+        map((response) => response.body),
+        filter((user): user is IUser => user !== null),
+        tap((user) => (this.currentUser = user))
+      );
   }
 
   logOut(): void {}
