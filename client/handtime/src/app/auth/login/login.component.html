@@ -75,6 +75,8 @@
           <fa-icon [icon]="faExclamationTriangle"></fa-icon></p
       ></ng-container>
 
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
       <div class="remember-forgot">
         <label><input type="checkbox" />Remember me</label>
         <a href="#">Forgot password?</a>
