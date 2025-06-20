@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'http://localhost:3030/data',
+  BASE_URL: 'http://localhost:3030/data',
+  API_URL: 'http://localhost:3030/users',
 };

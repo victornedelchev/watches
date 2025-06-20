@@ -15,6 +15,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { emailValidator, passwordMismatch } from './utils';
+import { UserService } from 'src/app/core/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -55,7 +57,12 @@ export class RegisterComponent implements OnInit {
     }),
   });
 
-  constructor(private titleService: Title, private formBuilder: FormBuilder) {}
+  constructor(
+    private titleService: Title,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');
@@ -73,5 +80,20 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = '';
 
     const { username, email, passwords } = this.registerFormGroup.value;
+
+    const body = {
+      username: username,
+      email: email,
+      password: passwords.password,
+    };
+
+    this.userService.register$(body).subscribe({
+      next: () => {
+        this.router.navigate(['/home'])
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Registration failed. Please try again.';
+      }
+    })
   }
 }

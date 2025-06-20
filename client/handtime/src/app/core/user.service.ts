@@ -1,25 +1,35 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
+import { Observable } from 'rxjs';
+import { IUser } from './interfaces/user';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
 
+const API_URL = environment.API_URL;
 
+export interface CreateUserDto {
+  username: string;
+  email: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  isLogged: boolean = false;
+  currentUser!: IUser;
 
-  constructor(private storage: StorageService) {
-    this.isLogged = this.storage.getItem('isLogged') ?? false;
+  get isLogged(): boolean {
+    return !!this.currentUser;
   }
 
-  login(): void {
-    this.isLogged = true;
-    this.storage.setItem('isLogged', true);
+  constructor(private storage: StorageService, private http: HttpClient) {}
+
+  register$(userData: CreateUserDto): Observable<IUser> {
+    return this.http.post<IUser>(`${API_URL}/register`, userData);
   }
 
-  logOut(): void {
-    this.isLogged = false;
-    this.storage.setItem('isLogged', false);
-  }
+  login(): void {}
+
+  logOut(): void {}
 }

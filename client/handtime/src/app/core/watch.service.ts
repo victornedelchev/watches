@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IWatch } from './interfaces/watch';
 import { environment } from 'src/environments/environment.development';
 
-const apiUsl = environment.apiUrl;
+const BASE_URL = environment.BASE_URL;
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,10 @@ export class WatchService {
   constructor(private http: HttpClient) {}
 
   loadWatchList$(): Observable<IWatch[]> {
-    return this.http.get<IWatch[]>(`${apiUsl}/watches`);
+    return this.http.get<IWatch[]>(`${BASE_URL}/watches`);
   }
 
   loadWatchById$(id: string): Observable<IWatch> {
-    return this.http.get<IWatch>(`${apiUsl}/watches/${id}`);
+    return this.http.get<IWatch>(`${BASE_URL}/watches/${id}`);
   }
 }
