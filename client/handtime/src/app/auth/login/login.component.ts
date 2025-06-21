@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, emailValidator]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(5),
     ]),
   });
 

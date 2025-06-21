@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
   passwordControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(6),
+    Validators.minLength(5),
   ]);
 
   get passwordGroup(): FormGroup {
