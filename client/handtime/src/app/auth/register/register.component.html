@@ -157,7 +157,10 @@
         </p>
       </ng-container>
 
-      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+        <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+      </p>
 
       <div class="remember-forgot">
         <label><input type="checkbox" />Remember me</label>
