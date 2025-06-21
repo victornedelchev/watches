@@ -21,4 +21,14 @@ export class WatchService {
   loadWatchById$(id: string): Observable<IWatch> {
     return this.http.get<IWatch>(`${BASE_URL}/watches/${id}`);
   }
+
+  addWatch$(body: {
+    brand: string;
+    model: string;
+    price: number;
+    imageUrl: string;
+    summary: string;
+  }): Observable<IWatch> {
+    return this.http.post<IWatch>(`${BASE_URL}/watches`, body);
+  }
 }

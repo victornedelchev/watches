@@ -162,6 +162,7 @@ p.error-message {
   border-radius: 0.3em;
   color: red;
   padding-top: 0;
+  margin-bottom: 25px;
 }
 
 .watch-add-container .input-error {

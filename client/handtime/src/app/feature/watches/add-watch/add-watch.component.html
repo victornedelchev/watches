@@ -131,6 +131,11 @@
         ></ng-container>
       </div>
 
+      <p class="error-message">
+        {{ errorMessage }}
+        <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+      </p>
+
       <button [disabled]="addWatchForm.invalid" class="btn">Add watch</button>
     </form>
   </div>
