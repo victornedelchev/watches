@@ -145,3 +145,25 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+input.ng-valid.ng-touched {
+  border-left-color: green;
+  border-right-color: green;
+}
+
+textarea.ng-valid.ng-touched {
+  border-left-color: green;
+  border-right-color: green;
+}
+
+p.error-message {
+  font-size: 14px;
+  text-align: center;
+  border-radius: 0.3em;
+  color: red;
+  padding-top: 0;
+}
+
+.watch-add-container .input-error {
+  border-bottom-color: red;
+}
