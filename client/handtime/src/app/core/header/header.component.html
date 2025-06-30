@@ -41,10 +41,10 @@
             <a class="nav-link" routerLink="/contact">Contact Us</a>
           </li>
           <li class="nav-item" [routerLinkActive]="'active'" *ngIf="!isLogged">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a class="nav-link" routerLink="/user/login">Login</a>
           </li>
           <li class="nav-item" [routerLinkActive]="'active'" *ngIf="!isLogged">
-            <a class="nav-link" routerLink="/register">Register</a>
+            <a class="nav-link" routerLink="/user/register">Register</a>
           </li>
           <li class="nav-item" [routerLinkActive]="'active'" *ngIf="isLogged">
             <a class="nav-link" routerLink="/watches/add">Add watch</a>
@@ -64,7 +64,7 @@
           [routerLinkActive]="'active'"
           *ngIf="isLogged"
         >
-          <a routerLink="/profile">
+          <a routerLink="/user/profile">
             <i class="fa fa-user" aria-hidden="true"></i>
           </a>
         </div>

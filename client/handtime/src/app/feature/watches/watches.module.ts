@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { WatchListComponent } from './watch-list/watch-list.component';
-import { WatchesRoutingModule } from './watches-routing-module';
+import { WatchesRoutingModule } from './watches-routing.module';
 import { WatchListItemComponent } from './watch-list-item/watch-list-item.component';
 import { WatchDetailsComponent } from './watch-details/watch-details.component';
 import { AddWatchComponent } from './add-watch/add-watch.component';

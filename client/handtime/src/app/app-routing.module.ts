@@ -9,6 +9,15 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  {
+    path: 'watches',
+    loadChildren: () =>
+      import('./feature/watches/watches.module').then((m) => m.WatchesModule),
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
   { path: 'testimonial', component: TestimonialComponent },
   { path: 'contact', component: ContactUsComponent },
 ];

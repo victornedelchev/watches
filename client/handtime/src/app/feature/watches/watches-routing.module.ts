@@ -6,13 +6,13 @@ import { AddWatchComponent } from './add-watch/add-watch.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guards';
 
 const routes: Routes = [
-  { path: 'watches', component: WatchListComponent },
+  { path: '', pathMatch: 'full', component: WatchListComponent },
   {
-    path: 'watches/add',
+    path: 'add',
     canActivate: [AuthGuard],
     component: AddWatchComponent,
   },
-  { path: 'watches/:_id', component: WatchDetailsComponent },
+  { path: ':_id', component: WatchDetailsComponent },
 ];
 
 @NgModule({
