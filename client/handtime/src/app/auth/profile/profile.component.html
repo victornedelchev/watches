@@ -12,12 +12,12 @@
       </div>
       <div class="profile-item">
         <span class="label">Created At:</span>
-        <span class="value">{{ currentUser._createdOn }}</span>
+        <span class="value">{{ currentUser._createdOn | date: 'longDate'}}</span>
       </div>
 
       <div *ngIf="currentUser._updatedOn" class="profile-item">
         <span class="label">Updated At:</span>
-        <span class="value">{{ currentUser._updatedOn }}</span>
+        <span class="value">{{ currentUser._updatedOn | date: 'longDate' }}</span>
       </div>
     </div>
   </div>
