@@ -4,6 +4,7 @@ import { HomeComponent } from './feature/pages/home/home.component';
 import { AboutComponent } from './feature/pages/about/about.component';
 import { TestimonialComponent } from './feature/pages/testimonial/testimonial.component';
 import { ContactUsComponent } from './feature/pages/contact-us/contact-us.component';
+import { NotFoundComponent } from './feature/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   },
   { path: 'testimonial', component: TestimonialComponent },
   { path: 'contact', component: ContactUsComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
