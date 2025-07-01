@@ -54,10 +54,10 @@
               >Logout</a
             >
           </li>
-          <li class="nav-item" *ngIf="isLogged">
+          <li class="nav-item user" *ngIf="isLogged">
             WELCOME {{ currentUser.username | uppercase }}
           </li>
-          <li class="nav-item" *ngIf="!isLogged">WELCOME GUEST</li>
+          <li class="nav-item user" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
         <div
           class="user_optio_box"
