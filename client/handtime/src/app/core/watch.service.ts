@@ -11,9 +11,8 @@ const BASE_URL = environment.BASE_URL;
 @Injectable({
   providedIn: 'root',
 })
-
 export class WatchService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   loadWatchList$(): Observable<IWatch[]> {
     return this.http.get<IWatch[]>(`${BASE_URL}/watches`);
@@ -31,5 +30,15 @@ export class WatchService {
     summary: string;
   }): Observable<IWatch> {
     return this.http.post<IWatch>(`${BASE_URL}/watches`, body);
+  }
+
+  editWatchById$(id: string, body: {
+    brand: string;
+    model: string;
+    price: number;
+    imageUrl: string;
+    summary: string;
+  }): Observable<IWatch> {
+    return this.http.put<IWatch>(`${BASE_URL}/watches/${id}`, body);
   }
 }
