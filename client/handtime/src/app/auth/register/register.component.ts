@@ -88,12 +88,23 @@ export class RegisterComponent implements OnInit {
     };
 
     this.userService.register$(body).subscribe({
-      next: () => {
-        this.router.navigate(['/home'])
+      next: (response) => {
+        if (response.accessToken) {
+          this.router.navigate(['/home']);
+        } else {
+          this.userService.login$({ email: body.email, password: body.password }).subscribe({
+            next: () => {
+              this.router.navigate(['/home']);
+            },
+            error: (err) => {
+              this.errorMessage = err.error?.message || 'Login failed after registration. Please try logging in.';
+            }
+          });
+        }
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'Registration failed. Please try again.';
+        this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
       }
-    })
+    });
   }
 }

@@ -30,19 +30,31 @@ export class UserService {
 
   constructor(private storage: StorageService, private http: HttpClient) {}
 
-  register$(userData: RegisterUserDto): Observable<IUser> {
-    return this.http.post<IUser>(`${API_URL}/register`, userData);
+  register$(userData: RegisterUserDto): Observable<IUser & { accessToken: string }> {
+    return this.http.post<IUser & { accessToken: string }>(`${API_URL}/register`, userData).pipe(
+      tap((response) => {
+        if (response.accessToken	) {
+          localStorage.setItem('access_token', response.accessToken);
+        }
+        this.currentUser = response;
+      })
+    );
   }
 
-  login$(userData: LoginUserDto): Observable<IUser> {
+  login$(userData: LoginUserDto): Observable<IUser & { accessToken: string }> {
     return this.http
-      .post<IUser>(`${API_URL}/login`, userData, {
+      .post<IUser & { accessToken: string }>(`${API_URL}/login`, userData, {
         observe: 'response',
       })
       .pipe(
         map((response) => response.body),
-        filter((user): user is IUser => user !== null),
-        tap((user) => (this.currentUser = user))
+        filter((user): user is IUser & { token: string } => user !== null),
+        tap((user) => {
+          if (user.accessToken) {
+            localStorage.setItem('access_token', user.accessToken);
+          }
+          this.currentUser = user;
+        })
       );
   }
 

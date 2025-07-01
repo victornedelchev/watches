@@ -5,4 +5,5 @@ export interface IUser {
   _createdOn: number;
   _updatedOn?: number;
   _id: string;
+  accessToken: string
 }
