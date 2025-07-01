@@ -41,4 +41,9 @@ export class WatchService {
   }): Observable<IWatch> {
     return this.http.put<IWatch>(`${BASE_URL}/watches/${id}`, body);
   }
+
+
+  deleteWatchById$(id: string): Observable<IWatch> {
+    return this.http.delete<IWatch>(`${BASE_URL}/watches/${id}`);
+  }
 }

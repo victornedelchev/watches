@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from 'src/app/core/interfaces/user';
 
 import { IWatch } from 'src/app/core/interfaces/watch';
@@ -22,7 +22,8 @@ export class WatchDetailsComponent implements OnInit {
     private titleService: Title,
     private watchService: WatchService,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +39,13 @@ export class WatchDetailsComponent implements OnInit {
         console.error('Error loading watch', err);
       },
     });
+  }
+
+  deleteWatch(): void {
+    const watchId = this.activatedRoute.snapshot.params['_id'];
+    this.watchService.deleteWatchById$(watchId).subscribe({
+      next: () => this.router.navigate(['/watches']),
+      error: (err) => console.error(err);
+    })
   }
 }
