@@ -6,4 +6,5 @@ export interface IWatch {
   summary: string;
   _createdOn: number;
   _id: string;
+  _ownerId: string
 }
