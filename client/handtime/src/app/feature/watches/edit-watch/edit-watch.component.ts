@@ -42,7 +42,7 @@ export class EditWatchComponent implements OnInit {
     })
   }
 
-  editWatch(editWatchForm: NgForm) {
+  editWatch(editWatchForm: NgForm): void {
     this.errorMessage = '';
     const watchId = this.activatedRoute.snapshot.params['_id'];
 
@@ -50,6 +50,10 @@ export class EditWatchComponent implements OnInit {
       next: () => {
         editWatchForm.reset();
         this.router.navigate([`/watches/${watchId}`])
+      },
+      error: (err) => {
+        this.errorMessage = err;
+        console.error(err);
       }
     })
   }
