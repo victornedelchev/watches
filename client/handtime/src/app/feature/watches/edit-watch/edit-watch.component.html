@@ -1,0 +1,142 @@
+<div class="watch-edit-container">
+  <div class="wrapper">
+    <form #editWatchForm="ngForm" (ngSubmit)="editWatch(editWatchForm)">
+      <h1>Edit watch</h1>
+      <div class="input-box">
+        <input
+          type="text"
+          [class.input-error]="brand.touched && brand.invalid"
+          name="brand"
+          placeholder="Brand"
+          required
+          minlength="3"
+          ngModel
+          #brand="ngModel"
+        />
+      </div>
+
+      <ng-container *ngIf="brand.touched && brand.invalid">
+        <p *ngIf="brand.errors?.['required']" class="error-message">
+          Brand is required.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+
+        <p *ngIf="brand.errors?.['minlength']" class="error-message">
+          Brand must be at least 3 characters long.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <div class="input-box">
+        <input
+          type="text"
+          [class.input-error]="model.touched && model.invalid"
+          name="model"
+          placeholder="Model"
+          required
+          minlength="3"
+          ngModel
+          #model="ngModel"
+        />
+      </div>
+
+      <ng-container *ngIf="model.touched && model.invalid">
+        <p *ngIf="model.errors?.['required']" class="error-message">
+          Model is required.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p *ngIf="model.errors?.['minlength']" class="error-message">
+          Model must be at least 3 characters long.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <div class="input-box">
+        <input
+          type="number"
+          name="price"
+          [class.input-error]="price.touched && price.invalid"
+          placeholder="Price"
+          required
+          min="1"
+          ngModel
+          #price="ngModel"
+        />
+      </div>
+
+      <ng-container *ngIf="price.touched && price.invalid">
+        <p *ngIf="price.errors?.['required']" class="error-message">
+          Price is required.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p *ngIf="price.errors?.['min']" class="error-message">
+          Price must be a positive number.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <div class="input-box">
+        <input
+          type="text"
+          [class.input-error]="imageUrl.touched && imageUrl.invalid"
+          name="imageUrl"
+          placeholder="Image URL"
+          required
+          ngModel
+          #imageUrl="ngModel"
+          pattern="https?://.+"
+          title="Image URL must start with http:// or https://"
+        />
+      </div>
+
+      <ng-container *ngIf="imageUrl.touched && imageUrl.invalid">
+        <p *ngIf="imageUrl.errors?.['required']" class="error-message">
+          Image URL is required.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p *ngIf="imageUrl.errors?.['pattern']" class="error-message">
+          Image URL must start with http:// or https://.
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </ng-container>
+
+      <div class="textarea-box">
+        <textarea
+          rows="4"
+          cols="50"
+          type="text"
+          [class.input-error]="summary.touched && summary.invalid"
+          name="summary"
+          placeholder="Summary"
+          required
+          ngModel
+          #summary="ngModel"
+          minlength="10"
+          maxlength="500"
+          title="Summary must be at least 10 characters long"
+        ></textarea>
+
+        <ng-container *ngIf="summary.touched && summary.invalid">
+          <p *ngIf="summary.errors?.['required']" class="error-message">
+            Summary is required.
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          </p>
+          <p *ngIf="summary.errors?.['minlength']" class="error-message">
+            Summary must be at least 10 characters long.
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          </p>
+          <p *ngIf="summary.errors?.['maxlength']" class="error-message">
+            Summary cannot exceed 500 characters.
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon></p
+        ></ng-container>
+      </div>
+
+      <p class="error-message">
+        {{ errorMessage }}
+        <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+      </p>
+
+      <button [disabled]="editWatchForm.invalid" class="btn">Edit</button>
+    </form>
+  </div>
+</div>
