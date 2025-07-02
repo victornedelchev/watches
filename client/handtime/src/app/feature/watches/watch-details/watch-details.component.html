@@ -24,6 +24,9 @@
               <div class="details-specs">
                 <h3>Specifications</h3>
                 {{ watch.summary }}
+                <div class="created-on">
+                  {{watch._createdOn | date: 'medium'}}
+                </div>
               </div>
 
               <div
