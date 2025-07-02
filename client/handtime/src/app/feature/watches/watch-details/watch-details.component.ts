@@ -15,6 +15,7 @@ import { WatchService } from 'src/app/core/watch.service';
 export class WatchDetailsComponent implements OnInit {
   watch!: IWatch;
   currentUser: IUser | null = this.userService.currentUser;
+  isLoading: boolean = true;
 
   constructor(
     private titleService: Title,
@@ -22,7 +23,7 @@ export class WatchDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Watch Details Page');
@@ -31,9 +32,11 @@ export class WatchDetailsComponent implements OnInit {
 
     this.watchService.loadWatchById$(watchId).subscribe({
       next: (data: IWatch) => {
+        this.isLoading = false;
         this.watch = data;
       },
       error: (err) => {
+        this.isLoading = false;
         console.error('Error loading watch', err);
       },
     });

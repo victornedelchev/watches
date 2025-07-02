@@ -1,33 +1,46 @@
 <div class="watch-details-container">
-<section class="details-section" *ngIf="!!watch">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="details-image-container">
-          <img
-            src="{{ watch.imageUrl }}"
-            alt="{{ watch.brand }}"
-            class="details-image"
-          />
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="details-content">
-          <h1 class="details-title">{{ watch.brand }}</h1>
-          <h2 class="details-title">{{ watch.model }}</h2>
-          <div class="details-price">$ {{ watch.price }}</div>
-          <div class="details-specs">
-            <h3>Specifications</h3>
-            {{ watch.summary }}
-          </div>
-
-          <div *ngIf="watch?._ownerId === currentUser?._id" class="details-actions">
-            <a routerLink="/watches/{{watch._id}}/edit" class="btn-edit"> Edit </a>
-            <button class="btn-delete" (click)="deleteWatch()">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
   </div>
-</section>
+
+  <ng-container *ngIf="!isLoading">
+    <section class="details-section" *ngIf="!!watch">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="details-image-container">
+              <img
+                src="{{ watch.imageUrl }}"
+                alt="{{ watch.brand }}"
+                class="details-image"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="details-content">
+              <h1 class="details-title">{{ watch.brand }}</h1>
+              <h2 class="details-title">{{ watch.model }}</h2>
+              <div class="details-price">$ {{ watch.price }}</div>
+              <div class="details-specs">
+                <h3>Specifications</h3>
+                {{ watch.summary }}
+              </div>
+
+              <div
+                *ngIf="watch?._ownerId === currentUser?._id"
+                class="details-actions"
+              >
+                <a routerLink="/watches/{{ watch._id }}/edit" class="btn-edit">
+                  Edit
+                </a>
+                <button class="btn-delete" (click)="deleteWatch()">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
 </div>
