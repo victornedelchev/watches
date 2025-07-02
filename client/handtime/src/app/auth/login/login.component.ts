@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
     this.userService.login$(this.loginFormGroup.value).subscribe({
       next: (user) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/watches']);
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed. Please try again.';

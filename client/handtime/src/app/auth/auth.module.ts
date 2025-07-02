@@ -8,6 +8,7 @@ import { AuthRouterModule } from './auth-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WatchesModule } from '../feature/watches/watches.module';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent],
@@ -17,8 +18,9 @@ import { WatchesModule } from '../feature/watches/watches.module';
     AuthRouterModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    WatchesModule
-  ],
+    WatchesModule,
+    SharedModule
+],
   exports: [LoginComponent, RegisterComponent, ProfileComponent],
 })
 export class AuthModule { }

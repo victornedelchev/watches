@@ -90,11 +90,11 @@ export class RegisterComponent implements OnInit {
     this.userService.register$(body).subscribe({
       next: (response) => {
         if (response.accessToken) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/watches']);
         } else {
           this.userService.login$({ email: body.email, password: body.password }).subscribe({
             next: () => {
-              this.router.navigate(['/home']);
+              this.router.navigate(['/watches']);
             },
             error: (err) => {
               this.errorMessage = err.error?.message || 'Login failed after registration. Please try logging in.';
