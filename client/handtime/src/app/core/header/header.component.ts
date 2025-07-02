@@ -17,10 +17,12 @@ export class HeaderComponent {
     return this.userService.currentUser;
   }
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) { }
 
   logoutHandler(): void {
-    this.userService.logOut();
-    this.router.navigate(['/watches']);
+    this.userService.logout$().subscribe({
+      next: () => this.router.navigate(['/watches']),
+      error: (err) => console.error(err),
+    });
   }
 }

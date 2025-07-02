@@ -68,4 +68,12 @@ export class UserService {
     localStorage.removeItem('access_token');
     this.currentUser = null;
   }
+
+  logout$(): Observable<void> {
+    this.logOut();
+
+    return this.http.post<void>(`${API_URL}/logout`, {}).pipe(
+      map(() => void 0)
+    )
+  }
 }
