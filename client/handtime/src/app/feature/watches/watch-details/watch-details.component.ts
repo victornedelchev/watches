@@ -16,8 +16,6 @@ export class WatchDetailsComponent implements OnInit {
   watch!: IWatch;
   currentUser: IUser = this.userService.currentUser;
 
-  
-
   constructor(
     private titleService: Title,
     private watchService: WatchService,
@@ -45,7 +43,7 @@ export class WatchDetailsComponent implements OnInit {
     const watchId = this.activatedRoute.snapshot.params['_id'];
     this.watchService.deleteWatchById$(watchId).subscribe({
       next: () => this.router.navigate(['/watches']),
-      error: (err) => console.error(err);
+      error: (err) => console.error(err),
     })
   }
 }

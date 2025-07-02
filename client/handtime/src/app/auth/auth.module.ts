@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AuthRouterModule } from './auth-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
+import { WatchesModule } from '../feature/watches/watches.module';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent],
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthRouterModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    WatchesModule
   ],
   exports: [LoginComponent, RegisterComponent, ProfileComponent],
 })
-export class AuthModule {}
+export class AuthModule { }

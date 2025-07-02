@@ -28,6 +28,6 @@ import { EditWatchComponent } from './edit-watch/edit-watch.component';
     FontAwesomeModule,
     FormsModule,
   ],
-  exports: [WatchListComponent, WatchesRoutingModule],
+  exports: [WatchListComponent, WatchesRoutingModule, WatchListItemComponent],
 })
-export class WatchesModule {}
+export class WatchesModule { }
