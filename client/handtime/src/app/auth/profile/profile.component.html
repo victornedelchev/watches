@@ -21,8 +21,13 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  
   <section class="product_section">
-    <div class="container">
+    <div *ngIf="!isLoading" class="container">
       <div class="product_heading">
         <h2 *ngIf="userWatchList.length === 1">Your watch</h2>
 

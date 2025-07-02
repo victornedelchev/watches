@@ -12,13 +12,13 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class ProfileComponent implements OnInit {
   userWatchList: IWatch[] = [];
-  isLoading:  boolean = true;
+  isLoading: boolean = true;
 
   get currentUser(): IUser | null {
     return this.userService.currentUser;
   }
 
-  constructor(private titleService: Title, private userService: UserService, private watchService: WatchService ) {}
+  constructor(private titleService: Title, private userService: UserService, private watchService: WatchService) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Profile Page');
@@ -27,7 +27,11 @@ export class ProfileComponent implements OnInit {
       next: (data: IWatch[]) => {
         this.isLoading = false;
         this.userWatchList = data.filter(watch => watch._ownerId === this.currentUser?._id);
-      } 
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error(err);
+      }
     })
   }
 }
