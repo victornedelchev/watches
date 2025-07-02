@@ -22,18 +22,18 @@ export interface LoginUserDto {
   providedIn: 'root',
 })
 export class UserService {
-  currentUser!: IUser;
+  currentUser!: IUser | null;
 
   get isLogged(): boolean {
     return !!this.currentUser;
   }
 
-  constructor(private storage: StorageService, private http: HttpClient) {}
+  constructor(private storage: StorageService, private http: HttpClient) { }
 
   register$(userData: RegisterUserDto): Observable<IUser & { accessToken: string }> {
     return this.http.post<IUser & { accessToken: string }>(`${API_URL}/register`, userData).pipe(
       tap((response) => {
-        if (response.accessToken	) {
+        if (response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
         }
         this.currentUser = response;
@@ -58,11 +58,14 @@ export class UserService {
       );
   }
 
-  logOut(): void {}
-
   getUser$(): Observable<IUser> {
     return this.http
       .get<IUser>(`${API_URL}/me`)
       .pipe(tap((user) => (this.currentUser = user)));
+  }
+
+  logOut(): void {
+    localStorage.removeItem('access_token');
+    this.currentUser = null;
   }
 }

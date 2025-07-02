@@ -13,7 +13,7 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
-  get currentUser(): IUser {
+  get currentUser(): IUser | null {
     return this.userService.currentUser;
   }
 

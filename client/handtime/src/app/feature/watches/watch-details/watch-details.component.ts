@@ -14,7 +14,7 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class WatchDetailsComponent implements OnInit {
   watch!: IWatch;
-  currentUser: IUser = this.userService.currentUser;
+  currentUser: IUser | null = this.userService.currentUser;
 
   constructor(
     private titleService: Title,

@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   userWatchList: IWatch[] = [];
   isLoading:  boolean = true;
 
-  get currentUser(): IUser {
+  get currentUser(): IUser | null {
     return this.userService.currentUser;
   }
 
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     this.watchService.loadWatchList$().subscribe({
       next: (data: IWatch[]) => {
         this.isLoading = false;
-        this.userWatchList = data.filter(watch => watch._ownerId === this.currentUser._id);
+        this.userWatchList = data.filter(watch => watch._ownerId === this.currentUser?._id);
       } 
     })
   }

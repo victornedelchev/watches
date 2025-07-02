@@ -55,7 +55,7 @@
             >
           </li>
           <li class="nav-item user" *ngIf="isLogged">
-            WELCOME {{ currentUser.username | uppercase }}
+            WELCOME {{ currentUser?.username | uppercase }}
           </li>
           <li class="nav-item user" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
