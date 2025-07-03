@@ -25,7 +25,7 @@
                 <h3>Specifications</h3>
                 {{ watch.summary }}
                 <div class="created-on">
-                  {{watch._createdOn | date: 'medium'}}
+                  {{ watch._createdOn | date : "medium" }}
                 </div>
               </div>
 
@@ -46,4 +46,39 @@
       </div>
     </section>
   </ng-container>
+
+  <div class="comments-container">
+    <h3>Comments</h3>
+
+    <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+    <p *ngIf="isLoading">Loading comments...</p>
+    <ul class="comment-list">
+      <ng-container *ngFor="let comment of comments">
+        <li class="comment-item">
+          <p class="comment-text">{{ comment.comment }}</p>
+          <p class="comment-meta">
+            By: {{comment.author.username}} - {{comment._createdOn | date: 'MMMM d, y'}}
+          </p>
+        </li>
+      </ng-container>
+    </ul>
+    <p *ngIf="comments.length === 0">No comments yet.</p>
+    <div *ngIf="isLoggedIn && !isOwner" className="add-comment-section">
+      <form #addCommentForm="ngForm" (ngSubmit)="addComment(addCommentForm)">
+        <textarea
+          name="comment"
+          class="comment-textarea"
+          placeholder="Add a comment..."
+          required
+          minlength="2"
+          ngModel
+          #comment="ngModel"
+        ></textarea>
+        <p>
+          <span>{{errorMessage}}</span>
+        </p>
+        <input class="add-comment-button" value="Add Comment" type="submit" />
+      </form>
+    </div>
+  </div>
 </div>

@@ -22,13 +22,7 @@ export interface LoginUserDto {
   providedIn: 'root',
 })
 export class UserService {
-  // currentUser!: IUser | null;
   public currentUser$ = new BehaviorSubject<IUser | null>(null);
-
-
-  // get isLogged(): boolean {
-  //   return !!this.currentUser;
-  // }
 
   constructor(private storage: StorageService, private http: HttpClient) { 
     const userJson = localStorage.getItem('user');
@@ -70,8 +64,6 @@ export class UserService {
         map((response) => response.body),
         filter((user): user is IUser & { token: string } => user !== null),
         tap((user) => {
-          console.log(user);
-          
           if (user.accessToken) {
             localStorage.setItem('access_token', user.accessToken);
           }
