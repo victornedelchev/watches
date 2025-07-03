@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   isLoading: boolean = true;
 
   get currentUser(): IUser | null {
-    return this.userService.currentUser;
+    return this.userService.getCurrentUser();
   }
 
   constructor(private titleService: Title, private userService: UserService, private watchService: WatchService) { }

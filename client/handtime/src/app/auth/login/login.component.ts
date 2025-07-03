@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
   loginHandler(): void {
     this.errorMessage = '';
     this.userService.login$(this.loginFormGroup.value).subscribe({
-      next: (user) => {
+      next: (response) => {
         this.router.navigate(['/watches']);
       },
       error: (err) => {

@@ -9,15 +9,21 @@ import { IUser } from '../interfaces/user';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  currentUser: IUser | null = null;
+  
   get isLogged(): boolean {
-    return this.userService.isLogged;
+    return this.userService.isLoggedIn();
   }
 
-  get currentUser(): IUser | null {
-    return this.userService.currentUser;
-  }
+  // get currentUser(): IUser | null {
+  //   return this.userService.getCurrentUser();
+  // }
 
-  constructor(private userService: UserService, private router: Router) { }
+
+
+  constructor(private userService: UserService, private router: Router) { 
+    this.userService.currentUser$.subscribe(user => this.currentUser = user)
+  }
 
   logoutHandler(): void {
     this.userService.logout$().subscribe({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { filter, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, tap } from 'rxjs';
 import { IUser } from './interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
@@ -22,13 +22,32 @@ export interface LoginUserDto {
   providedIn: 'root',
 })
 export class UserService {
-  currentUser!: IUser | null;
+  // currentUser!: IUser | null;
+  public currentUser$ = new BehaviorSubject<IUser | null>(null);
 
-  get isLogged(): boolean {
-    return !!this.currentUser;
+
+  // get isLogged(): boolean {
+  //   return !!this.currentUser;
+  // }
+
+  constructor(private storage: StorageService, private http: HttpClient) { 
+    const userJson = localStorage.getItem('user');
+    if (userJson) {
+      this.currentUser$.next(JSON.parse(userJson));
+    }
   }
 
-  constructor(private storage: StorageService, private http: HttpClient) { }
+  setCurrentUser(user: IUser) {
+    this.currentUser$.next(user);
+  }
+
+  getCurrentUser () {
+    return this.currentUser$.value;
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('access_token');
+  }
 
   register$(userData: RegisterUserDto): Observable<IUser & { accessToken: string }> {
     return this.http.post<IUser & { accessToken: string }>(`${API_URL}/register`, userData).pipe(
@@ -36,7 +55,8 @@ export class UserService {
         if (response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
         }
-        this.currentUser = response;
+        localStorage.setItem('user', JSON.stringify(response));
+        this.currentUser$.next(response);
       })
     );
   }
@@ -50,10 +70,13 @@ export class UserService {
         map((response) => response.body),
         filter((user): user is IUser & { token: string } => user !== null),
         tap((user) => {
+          console.log(user);
+          
           if (user.accessToken) {
             localStorage.setItem('access_token', user.accessToken);
           }
-          this.currentUser = user;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUser$.next(user);
         })
       );
   }
@@ -61,12 +84,14 @@ export class UserService {
   getUser$(): Observable<IUser> {
     return this.http
       .get<IUser>(`${API_URL}/me`)
-      .pipe(tap((user) => (this.currentUser = user)));
+      .pipe(tap((user) => (this.currentUser$.next(user))));
   }
 
   logOut(): void {
     localStorage.removeItem('access_token');
-    this.currentUser = null;
+    localStorage.removeItem('user');
+    this.currentUser$.next(null);
+    // this.currentUser = null;
   }
 
   logout$(): Observable<void> {
