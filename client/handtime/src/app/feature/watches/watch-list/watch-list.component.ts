@@ -10,12 +10,13 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class WatchListComponent implements OnInit {
   watchList: IWatch[] = [];
+  latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
 
   constructor(
     private titleService: Title,
     private watchService: WatchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Products Page');

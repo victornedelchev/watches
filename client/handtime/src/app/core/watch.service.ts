@@ -7,6 +7,7 @@ import { IWatch } from './interfaces/watch';
 import { environment } from 'src/environments/environment.development';
 
 const BASE_URL = environment.BASE_URL;
+const SORTING_STRING = environment.SORTING_STRING;
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,10 @@ export class WatchService {
 
   loadWatchList$(): Observable<IWatch[]> {
     return this.http.get<IWatch[]>(`${BASE_URL}/watches`);
+  }
+
+  loadLastWatchList$(): Observable<IWatch[]> {
+    return this.http.get<IWatch[]>(`${BASE_URL}/watches${SORTING_STRING}`);
   }
 
   loadWatchById$(id: string): Observable<IWatch> {

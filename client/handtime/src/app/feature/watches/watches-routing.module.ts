@@ -5,6 +5,7 @@ import { WatchDetailsComponent } from './watch-details/watch-details.component';
 import { AddWatchComponent } from './add-watch/add-watch.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guards';
 import { EditWatchComponent } from './edit-watch/edit-watch.component';
+import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: WatchListComponent },
@@ -13,12 +14,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: AddWatchComponent,
   },
+  { path: 'new-arrivals', component: NewArrivalsComponent },
   { path: ':_id', component: WatchDetailsComponent },
-  {path: ':_id/edit', component: EditWatchComponent},
+  { path: ':_id/edit', component: EditWatchComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WatchesRoutingModule {}
+export class WatchesRoutingModule { }

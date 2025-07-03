@@ -1,0 +1,17 @@
+<section class="product_section">
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!isLoading" class="container">
+    <div class="product_heading">
+      <h2>New Arrivals</h2>
+    </div>
+    <div class="product_container">
+      <app-watch-list-item
+        *ngFor="let watch of latestWatchList"
+        [watch]="watch"
+      >
+      </app-watch-list-item>
+    </div>
+  </div>
+</section>
