@@ -22,6 +22,7 @@ export class WatchDetailsComponent implements OnInit {
   errorMessage: string = '';
   comments: IComment[] = [];
   isOwner: boolean = false;
+  isModalOpen: boolean = false;
 
   constructor(
     private titleService: Title,
@@ -65,12 +66,23 @@ export class WatchDetailsComponent implements OnInit {
     })
   }
 
-  deleteWatch(): void {
+  openDeleteModal(): void {
+    this.isModalOpen = true;
+  }
+
+  closeDeleteModal(): void {
+    this.isModalOpen = false;
+  }
+
+  confirmDeleteWatch(): void {
     const watchId = this.activatedRoute.snapshot.params['_id'];
+
     this.watchService.deleteWatchById$(watchId).subscribe({
       next: () => this.router.navigate(['/watches']),
       error: (err) => console.error(err),
     })
+
+    this.isModalOpen = false;
   }
 
   addComment(addCommentForm: NgForm) {

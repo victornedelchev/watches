@@ -13,6 +13,8 @@ import { AddWatchComponent } from './add-watch/add-watch.component';
 import { SharedModule } from '../../shared/shared.module';
 import { EditWatchComponent } from './edit-watch/edit-watch.component';
 import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
+import { EditModalComponent } from './edit-watch/edit-modal/edit-modal.component';
+import { DeleteModalComponent } from './watch-details/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
     AddWatchComponent,
     EditWatchComponent,
     NewArrivalsComponent,
+    EditModalComponent,
+    DeleteModalComponent,
   ],
   imports: [
     CommonModule,

@@ -27,6 +27,9 @@
                 <div class="created-on">
                   {{ watch._createdOn | date : "medium" }}
                 </div>
+                <div *ngIf="watch._updatedOn" class="updated-on">
+                  {{ watch._updatedOn| date : "medium" }}
+                </div>
               </div>
 
               <div
@@ -36,7 +39,7 @@
                 <a routerLink="/watches/{{ watch._id }}/edit" class="btn-edit">
                   Edit
                 </a>
-                <button class="btn-delete" (click)="deleteWatch()">
+                <button class="btn-delete" (click)="openDeleteModal()">
                   Delete
                 </button>
               </div>
@@ -45,6 +48,14 @@
         </div>
       </div>
     </section>
+    <app-delete-modal
+    *ngIf="isModalOpen"
+    [watchName]="watch.brand"
+    [watchModel]="watch.model"
+    (confirm)="confirmDeleteWatch()"
+    (cancel)="closeDeleteModal()"
+    >
+    </app-delete-modal>
   </ng-container>
 
   <div class="comments-container">

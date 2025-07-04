@@ -86,6 +86,11 @@
   color: #1b63ac;
 }
 
+.updated-on {
+  margin-top: 20px;
+  color: #eb422bd6;
+}
+
 .btn-edit,
 .btn-delete {
   padding: 12px 30px;
