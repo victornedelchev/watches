@@ -1,3 +1,7 @@
+.watch-details-container {
+  min-height: 100vh;
+}
+
 .details-section {
   padding: 80px 0;
   background-color: #f8f9fa;
