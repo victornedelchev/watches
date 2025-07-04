@@ -139,4 +139,12 @@
       <button [disabled]="editWatchForm.invalid" class="btn">Edit</button>
     </form>
   </div>
+  <app-edit-modal
+  *ngIf="isModalOpen"
+  [watch]="selectedWatch"
+  (save)="onModalSave()"
+  (close)="onModalClose()"
+   >
+  </app-edit-modal>
 </div>
+

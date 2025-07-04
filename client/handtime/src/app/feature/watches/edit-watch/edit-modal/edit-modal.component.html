@@ -1,0 +1,19 @@
+<div class="modal-overlay">
+  <div class="modal-backdrop" (click)="onClose()"></div>
+  <div class="modal-container">
+    <button class="modal-close-button" (click)="onClose()">&times;</button>
+    <h2 class="modal-title">Confirm Edit</h2>
+    <p class="modal-message">
+      Are you sure you want to edit this watch to brand <b>{{ watch?.brand }}</b> and
+      model <b>{{ watch?.model }}</b>?
+    </p>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" (click)="onClose()">
+        Cancel
+      </button>
+      <button class="modal-btn modal-btn-confirm" (click)="onSave()">
+        Edit
+      </button>
+    </div>
+  </div>
+</div>

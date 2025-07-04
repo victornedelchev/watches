@@ -19,6 +19,9 @@ export class EditWatchComponent implements OnInit {
 
   faExclamationTriangle = faExclamationTriangle;
   errorMessage: string = '';
+  isModalOpen: boolean = false;
+  pendingEditData: any = null;
+  selectedWatch: IWatch | null = null;
 
   constructor(private titleService: Title,
     private watchService: WatchService,
@@ -44,17 +47,35 @@ export class EditWatchComponent implements OnInit {
 
   editWatch(editWatchForm: NgForm): void {
     this.errorMessage = '';
+    this.pendingEditData = { ...editWatchForm.value };
+    this.selectedWatch = { ...editWatchForm.value };
+    this.isModalOpen = true;
+  }
+
+  onModalSave() {
     const watchId = this.activatedRoute.snapshot.params['_id'];
 
-    this.watchService.editWatchById$(watchId, editWatchForm.value).subscribe({
+    this.watchService.editWatchById$(watchId, this.pendingEditData).subscribe({
       next: () => {
-        editWatchForm.reset();
+        this.isModalOpen = false;
+        this.pendingEditData = null;
+        this.selectedWatch = null;
+        this.editWatchForm.reset();
         this.router.navigate([`/watches/${watchId}`])
       },
       error: (err) => {
         this.errorMessage = err;
+        this.isModalOpen = false;
+        this.pendingEditData = null;
+        this.selectedWatch = null;
         console.error(err);
       }
     })
+  }
+
+  onModalClose() {
+    this.isModalOpen = false;
+    this.pendingEditData = null;
+    this.selectedWatch = null;
   }
 }
