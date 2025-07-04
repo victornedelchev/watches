@@ -83,7 +83,6 @@ export class UserService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user');
     this.currentUser$.next(null);
-    // this.currentUser = null;
   }
 
   logout$(): Observable<void> {

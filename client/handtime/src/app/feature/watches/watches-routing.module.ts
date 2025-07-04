@@ -11,12 +11,16 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: WatchListComponent },
   {
     path: 'add',
-    canActivate: [AuthGuard],
     component: AddWatchComponent,
+    canActivate: [AuthGuard],
   },
   { path: 'new-arrivals', component: NewArrivalsComponent },
   { path: ':_id', component: WatchDetailsComponent },
-  { path: ':_id/edit', component: EditWatchComponent },
+  {
+    path: ':_id/edit',
+    component: EditWatchComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
