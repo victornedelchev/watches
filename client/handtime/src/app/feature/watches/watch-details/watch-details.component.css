@@ -169,6 +169,109 @@
   margin: 0;
 }
 
+.comment-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.create,
+.update {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-edit-comment,
+.btn-delete-comment {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit-comment {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-edit-comment:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete-comment {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete-comment:hover {
+  background-color: #c82333;
+}
+
+.edit-comment-form {
+  margin-top: 10px;
+}
+
+.edit-comment-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.edit-comment-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-save,
+.btn-cancel {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-save {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.btn-save:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #545b62;
+}
+
 .add-comment-section {
   margin-bottom: 20px;
 }
@@ -199,6 +302,7 @@
 }
 
 .error-message {
-  color: red;
-  margin-bottom: 10px;
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 5px;
 }

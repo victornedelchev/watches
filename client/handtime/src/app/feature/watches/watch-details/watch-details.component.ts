@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommentService } from 'src/app/core/comment.service';
-import { IComment } from 'src/app/core/interfaces/comment';
-import { IUser } from 'src/app/core/interfaces/user';
 
-import { IWatch } from 'src/app/core/interfaces/watch';
+import { CommentService } from 'src/app/core/comment.service';
 import { UserService } from 'src/app/core/user.service';
 import { WatchService } from 'src/app/core/watch.service';
+
+import { IComment } from 'src/app/core/interfaces/comment';
+import { IUser } from 'src/app/core/interfaces/user';
+import { IWatch } from 'src/app/core/interfaces/watch';
 
 @Component({
   selector: 'app-watch-details',
@@ -23,6 +24,9 @@ export class WatchDetailsComponent implements OnInit {
   comments: IComment[] = [];
   isOwner: boolean = false;
   isModalOpen: boolean = false;
+  editingCommentId: string = '';
+  editCommentText: string = '';
+  isEditMode: boolean = false;
 
   constructor(
     private titleService: Title,
@@ -39,7 +43,10 @@ export class WatchDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Watch Details Page');
+    this.loadWatchAndComments();
+  }
 
+  private loadWatchAndComments(): void {
     const watchId = this.activatedRoute.snapshot.params['_id'];
 
     this.watchService.loadWatchById$(watchId).subscribe({
@@ -63,7 +70,7 @@ export class WatchDetailsComponent implements OnInit {
         this.errorMessage = err;
         console.error(err);
       }
-    })
+    });
   }
 
   openDeleteModal(): void {
@@ -96,6 +103,7 @@ export class WatchDetailsComponent implements OnInit {
           _id: this.currentUser!._id,
           username: this.currentUser!.username
         }
+
         this.comments.unshift(createdComment);
         addCommentForm.reset();
       },
@@ -104,5 +112,81 @@ export class WatchDetailsComponent implements OnInit {
         console.error(err);
       }
     })
+  }
+
+  startEditComment(comment: IComment): void {
+    this.editingCommentId = comment._id;
+    this.editCommentText = comment.comment;
+    this.isEditMode = true;
+  }
+
+  cancelEditComment(): void {
+    this.editingCommentId = '';
+    this.editCommentText = '';
+  }
+
+  saveEditComment(commentId: string): void {
+    this.errorMessage = '';
+    const watchId = this.activatedRoute.snapshot.params['_id'];
+
+    this.commentService.editCommentById$(watchId, commentId, this.editCommentText).subscribe({
+
+      next: (updatedComment: IComment) => {
+        const index = this.comments.findIndex(comment => comment._id === commentId);
+        if (index !== -1) {
+          const existingComment = this.comments[index];
+
+          const updatedCommentData = {
+            ...existingComment,
+            comment: this.editCommentText,
+            _updatedOn: Date.now(),
+          };
+
+          if (updatedComment.comment) {
+            updatedCommentData.comment = updatedComment.comment;
+          }
+          if (updatedComment._updatedOn) {
+            updatedCommentData._updatedOn = updatedComment._updatedOn;
+          }
+
+          this.comments[index] = updatedCommentData;
+        }
+        this.editingCommentId = '';
+        this.editCommentText = '';
+        this.isEditMode = false;
+
+      },
+      error: (err) => {
+        this.errorMessage = err;
+        this.isEditMode = false;
+        console.error(err);
+      }
+    });
+  }
+
+  deleteComment(commentId: string): void {
+    this.errorMessage = '';
+
+    if (!confirm('Are you sure you want to delete this comment?')) {
+      return;
+    }
+
+    this.commentService.deleteCommentById$(commentId).subscribe({
+      next: () => {
+        this.comments = this.comments.filter(comment => comment._id !== commentId);
+      },
+      error: (err) => {
+        this.errorMessage = err;
+        console.error(err);
+      }
+    });
+  }
+
+  canEditComment(comment: IComment): boolean {
+    return this.currentUser?._id === comment._ownerId;
+  }
+
+  canDeleteComment(comment: IComment): boolean {
+    return this.currentUser?._id === comment._ownerId;
   }
 }

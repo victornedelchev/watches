@@ -25,10 +25,10 @@
                 <h3>Specifications</h3>
                 {{ watch.summary }}
                 <div class="created-on">
-                  {{ watch._createdOn | date : "medium" }}
+                  Created on: <b>{{ watch._createdOn | date : "medium" }}</b>
                 </div>
                 <div *ngIf="watch._updatedOn" class="updated-on">
-                  {{ watch._updatedOn| date : "medium" }}
+                  Updated on: <b>{{ watch._updatedOn | date : "medium" }}</b>
                 </div>
               </div>
 
@@ -49,11 +49,11 @@
       </div>
     </section>
     <app-delete-modal
-    *ngIf="isModalOpen"
-    [watchName]="watch.brand"
-    [watchModel]="watch.model"
-    (confirm)="confirmDeleteWatch()"
-    (cancel)="closeDeleteModal()"
+      *ngIf="isModalOpen"
+      [watchName]="watch.brand"
+      [watchModel]="watch.model"
+      (confirm)="confirmDeleteWatch()"
+      (cancel)="closeDeleteModal()"
     >
     </app-delete-modal>
   </ng-container>
@@ -61,21 +61,78 @@
   <div class="comments-container">
     <h3>Comments</h3>
 
-    <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
     <p *ngIf="isLoading">Loading comments...</p>
     <ul class="comment-list">
       <ng-container *ngFor="let comment of comments">
         <li class="comment-item">
-          <p class="comment-text">{{ comment.comment }}</p>
-          <p class="comment-meta">
-            By: {{comment.author.username}} - {{comment._createdOn | date: 'MMMM d, y'}}
-          </p>
+          <div
+            *ngIf="editingCommentId === comment._id"
+            class="edit-comment-form"
+          >
+            <textarea
+              [(ngModel)]="editCommentText"
+              class="edit-comment-textarea"
+              placeholder="Edit your comment..."
+              required
+              minlength="2"
+              #editComment="ngModel"
+            ></textarea>
+            <ng-container *ngIf="editComment.invalid && editComment.touched">
+              <p *ngIf="editComment.errors?.['required']" class="error-message">
+                Comment is required!
+              </p>
+              <p *ngIf="editComment.errors?.['minlength']" class="error-message">
+                Comment must be at least 2 characters long!
+              </p>
+            </ng-container>
+            <div class="edit-comment-actions">
+              <button
+                class="btn-save"
+                (click)="saveEditComment(comment._id)"
+                [disabled]="editComment.invalid"
+              >
+                Save
+              </button>
+              <button class="btn-cancel" (click)="cancelEditComment()">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="editingCommentId !== comment._id">
+            <p class="comment-text">{{ comment.comment }}</p>
+            <p class="comment-meta create">
+              By: {{ comment.author.username }} -
+              {{ comment._createdOn | date : "MMMM d, y" }}
+            </p>
+            <p *ngIf="comment._updatedOn" class="comment-meta update">
+              Edited - {{ comment._updatedOn | date : "MMMM d, y" }}
+            </p>
+
+            <div *ngIf="isLoggedIn" class="comment-actions">
+              <button
+                *ngIf="canEditComment(comment)"
+                class="btn-edit-comment"
+                (click)="startEditComment(comment)"
+              >
+                Edit
+              </button>
+              <button
+                *ngIf="canDeleteComment(comment)"
+                class="btn-delete-comment"
+                (click)="deleteComment(comment._id)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </li>
       </ng-container>
     </ul>
     <p *ngIf="comments.length === 0">No comments yet.</p>
     <div *ngIf="isLoggedIn && !isOwner" className="add-comment-section">
-      <form #addCommentForm="ngForm" (ngSubmit)="addComment(addCommentForm)">
+      <form *ngIf="!isEditMode" #addCommentForm="ngForm" (ngSubmit)="addComment(addCommentForm)">
         <textarea
           name="comment"
           class="comment-textarea"
@@ -85,10 +142,24 @@
           ngModel
           #comment="ngModel"
         ></textarea>
+        <ng-container *ngIf="addCommentForm.invalid && addCommentForm.touched">
+          <p *ngIf="comment.errors?.['required']" class="error-message">
+            Comment is required!
+          </p>
+          <p *ngIf="comment.errors?.['minlength']" class="error-message">
+            Comment must be at least 2 characters long!
+          </p>
+        </ng-container>
         <p>
-          <span>{{errorMessage}}</span>
+          <span>{{ errorMessage }}</span>
         </p>
-        <input class="add-comment-button" value="Add Comment" type="submit" />
+        <button
+          [disabled]="addCommentForm.invalid"
+          class="add-comment-button"
+          type="submit"
+        >
+          Add Comment
+        </button>
       </form>
     </div>
   </div>
