@@ -100,6 +100,12 @@
             </div>
           </div>
 
+          <app-comment-delete-modal *ngIf="isModalOpen"
+          (confirm)="deleteComment(comment._id)"
+          (cancel)="closeDeleteModal()"
+          >
+          </app-comment-delete-modal>
+
           <div *ngIf="editingCommentId !== comment._id">
             <p class="comment-text">{{ comment.comment }}</p>
             <p class="comment-meta create">
@@ -121,7 +127,7 @@
               <button
                 *ngIf="canDeleteComment(comment)"
                 class="btn-delete-comment"
-                (click)="deleteComment(comment._id)"
+                (click)="openDeleteModal()"
               >
                 Delete
               </button>
@@ -129,6 +135,7 @@
           </div>
         </li>
       </ng-container>
+      
     </ul>
     <p *ngIf="comments.length === 0">No comments yet.</p>
     <div *ngIf="isLoggedIn && !isOwner" className="add-comment-section">

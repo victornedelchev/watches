@@ -167,10 +167,6 @@ export class WatchDetailsComponent implements OnInit {
   deleteComment(commentId: string): void {
     this.errorMessage = '';
 
-    if (!confirm('Are you sure you want to delete this comment?')) {
-      return;
-    }
-
     this.commentService.deleteCommentById$(commentId).subscribe({
       next: () => {
         this.comments = this.comments.filter(comment => comment._id !== commentId);
@@ -180,6 +176,8 @@ export class WatchDetailsComponent implements OnInit {
         console.error(err);
       }
     });
+
+    this.isModalOpen = false;
   }
 
   canEditComment(comment: IComment): boolean {

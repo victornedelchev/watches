@@ -15,6 +15,7 @@ import { EditWatchComponent } from './edit-watch/edit-watch.component';
 import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
 import { EditModalComponent } from './edit-watch/edit-modal/edit-modal.component';
 import { DeleteModalComponent } from './watch-details/delete-modal/delete-modal.component';
+import { CommentDeleteModalComponent } from './watch-details/comment-delete-modal/comment-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DeleteModalComponent } from './watch-details/delete-modal/delete-modal.
     NewArrivalsComponent,
     EditModalComponent,
     DeleteModalComponent,
+    CommentDeleteModalComponent,
   ],
   imports: [
     CommonModule,
