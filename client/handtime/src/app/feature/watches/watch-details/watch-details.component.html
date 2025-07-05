@@ -39,7 +39,7 @@
                 <a routerLink="/watches/{{ watch._id }}/edit" class="btn-edit">
                   Edit
                 </a>
-                <button class="btn-delete" (click)="openDeleteModal()">
+                <button class="btn-delete" (click)="openWatchDeleteModal()">
                   Delete
                 </button>
               </div>
@@ -49,11 +49,11 @@
       </div>
     </section>
     <app-delete-modal
-      *ngIf="isModalOpen"
+      *ngIf="isWatchDeleteModalOpen"
       [watchName]="watch.brand"
       [watchModel]="watch.model"
       (confirm)="confirmDeleteWatch()"
-      (cancel)="closeDeleteModal()"
+      (cancel)="closeWatchDeleteModal()"
     >
     </app-delete-modal>
   </ng-container>
@@ -100,11 +100,7 @@
             </div>
           </div>
 
-          <app-comment-delete-modal *ngIf="isModalOpen"
-          (confirm)="deleteComment(comment._id)"
-          (cancel)="closeDeleteModal()"
-          >
-          </app-comment-delete-modal>
+
 
           <div *ngIf="editingCommentId !== comment._id">
             <p class="comment-text">{{ comment.comment }}</p>
@@ -127,7 +123,7 @@
               <button
                 *ngIf="canDeleteComment(comment)"
                 class="btn-delete-comment"
-                (click)="openDeleteModal()"
+                (click)="openCommentDeleteModal(comment._id)"
               >
                 Delete
               </button>
@@ -170,4 +166,11 @@
       </form>
     </div>
   </div>
+
+  <app-comment-delete-modal 
+    *ngIf="isCommentDeleteModalOpen"
+    (confirm)="deleteComment(commentToDelete)"
+    (cancel)="closeCommentDeleteModal()"
+  >
+  </app-comment-delete-modal>
 </div>

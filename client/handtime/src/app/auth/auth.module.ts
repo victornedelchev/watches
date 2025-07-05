@@ -20,7 +20,7 @@ import { SharedModule } from "../shared/shared.module";
     ReactiveFormsModule,
     WatchesModule,
     SharedModule
-],
+  ],
   exports: [LoginComponent, RegisterComponent, ProfileComponent],
 })
 export class AuthModule { }

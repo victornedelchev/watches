@@ -23,7 +23,9 @@ export class WatchDetailsComponent implements OnInit {
   errorMessage: string = '';
   comments: IComment[] = [];
   isOwner: boolean = false;
-  isModalOpen: boolean = false;
+  isWatchDeleteModalOpen: boolean = false;
+  isCommentDeleteModalOpen: boolean = false;
+  commentToDelete: string = '';
   editingCommentId: string = '';
   editCommentText: string = '';
   isEditMode: boolean = false;
@@ -73,12 +75,22 @@ export class WatchDetailsComponent implements OnInit {
     });
   }
 
-  openDeleteModal(): void {
-    this.isModalOpen = true;
+  openWatchDeleteModal(): void {
+    this.isWatchDeleteModalOpen = true;
   }
 
-  closeDeleteModal(): void {
-    this.isModalOpen = false;
+  closeWatchDeleteModal(): void {
+    this.isWatchDeleteModalOpen = false;
+  }
+
+  openCommentDeleteModal(commentId: string): void {
+    this.commentToDelete = commentId;
+    this.isCommentDeleteModalOpen = true;
+  }
+
+  closeCommentDeleteModal(): void {
+    this.isCommentDeleteModalOpen = false;
+    this.commentToDelete = '';
   }
 
   confirmDeleteWatch(): void {
@@ -89,7 +101,7 @@ export class WatchDetailsComponent implements OnInit {
       error: (err) => console.error(err),
     })
 
-    this.isModalOpen = false;
+    this.isWatchDeleteModalOpen = false;
   }
 
   addComment(addCommentForm: NgForm) {
@@ -177,7 +189,7 @@ export class WatchDetailsComponent implements OnInit {
       }
     });
 
-    this.isModalOpen = false;
+    this.isCommentDeleteModalOpen = false;
   }
 
   canEditComment(comment: IComment): boolean {
