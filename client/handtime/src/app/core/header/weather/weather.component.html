@@ -1,0 +1,7 @@
+<div class="temperature-container">
+  <span class="temperature">
+    {{ !location ? "--" : location }}
+    {{ !temperature ? "--" : temperature }}°c
+  </span>
+  <img [src]="icon" alt="weather-icon" class="weather-icon" />
+</div>

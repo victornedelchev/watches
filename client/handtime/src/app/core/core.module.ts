@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { storageServiceProvider } from './storage.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DigitalClockComponent } from './header/digital-clock/digital-clock.component';
+import { WeatherComponent } from './header/weather/weather.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, DigitalClockComponent],
+  declarations: [HeaderComponent, FooterComponent, DigitalClockComponent, WeatherComponent],
   imports: [CommonModule, RouterModule, HttpClientModule],
   exports: [HeaderComponent, FooterComponent],
   providers: [storageServiceProvider],
