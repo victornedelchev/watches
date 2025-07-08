@@ -5,11 +5,15 @@ import { AboutComponent } from './feature/pages/about/about.component';
 import { TestimonialComponent } from './feature/pages/testimonial/testimonial.component';
 import { ContactUsComponent } from './feature/pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './feature/pages/not-found/not-found.component';
+import { GetWeatherComponent } from './feature/pages/get-weather/get-weather.component';
+import { AuthGuard } from './core/guards/auth.guards';
+import { GuestGuard } from './core/guards/guest.gards';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'get-weather', component: GetWeatherComponent, canActivate: [GuestGuard] },
   {
     path: 'watches',
     loadChildren: () =>
@@ -28,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

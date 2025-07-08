@@ -25,10 +25,10 @@
                 <h3>Specifications</h3>
                 {{ watch.summary }}
                 <div class="created-on">
-                  Created on: <b>{{ watch._createdOn | date : "medium" }}</b>
+                  Created on: <b>{{ watch._createdOn | timeAgo }}</b>
                 </div>
                 <div *ngIf="watch._updatedOn" class="updated-on">
-                  Updated on: <b>{{ watch._updatedOn | date : "medium" }}</b>
+                  Updated on: <b>{{ watch._updatedOn | timeAgo }}</b>
                 </div>
               </div>
 

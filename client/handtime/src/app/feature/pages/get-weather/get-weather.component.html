@@ -1,0 +1,31 @@
+<div class="weather-container">
+  <div class="weather">
+    <div class="sear-bar">
+      <input #cityInput type="text" placeholder="Search" />
+      <img
+        src="../../../../assets/images/weather/search.png"
+        alt=""
+        (click)="onSearchClick()"
+      />
+    </div>
+    <img [src]="icon" alt="" class="weather-icon" />
+    <p class="temperature">{{ temperature }}°c</p>
+    <p class="location">{{ location }}</p>
+    <div class="weather-data">
+      <div class="col">
+        <img src="../../../../assets/images/weather/humidity.png" alt="" />
+        <div>
+          <p>{{ humidity }} %</p>
+          <span>Humidity</span>
+        </div>
+      </div>
+      <div class="col">
+        <img src="../../../../assets/images/weather/wind.png" alt="" />
+        <div>
+          <p>{{ winSpeed }} Km/h</p>
+          <span>Wind Speed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

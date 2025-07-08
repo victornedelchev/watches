@@ -5,11 +5,11 @@ import { IWeather } from '../../interfaces/weather';
 const icons: { [key: string]: string } = {
   "01d": 'assets/images/weather/clear.png', // clear_icon_day
   "01n": 'assets/images/weather/moon.png', // clear_icon_night
-  "02d": 'assets/images/weather.cloud.png', // cloud_icon_day
+  "02d": 'assets/images/weather/cloud.png', // cloud_icon_day
   "02n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
-  "03d": 'assets/images/weather.cloud.png', // cloud_icon_day
+  "03d": 'assets/images/weather/cloud.png', // cloud_icon_day
   "03n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
-  "04d": 'assets/images/weather.cloud.png', // cloud_icon_day
+  "04d": 'assets/images/weather/cloud.png', // cloud_icon_day
   "04n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
   "09d": 'assets/images/weather/drizzle.png', //drizzle_icon_day,
   "09n": 'assets/images/weather/night-drizzle.png',// drizzle_icon_night,

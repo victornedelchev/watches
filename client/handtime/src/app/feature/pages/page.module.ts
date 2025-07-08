@@ -7,6 +7,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SharedModule } from "../../shared/shared.module";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { GetWeatherComponent } from './get-weather/get-weather.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     TestimonialComponent,
     ContactUsComponent,
     NotFoundComponent,
+    GetWeatherComponent,
   ],
   imports: [CommonModule, RouterModule, SharedModule],
   exports: [HomeComponent, AboutComponent],
