@@ -559,6 +559,21 @@ a:focus {
   font-size: 24px;
 }
 
+.product_section .search_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.product_section .search_form .search_bar {
+  width: 100%;
+  border: 2px solid #8019c8;
+  border-radius: 10px;
+  padding: 5px 10px;
+  outline: none;
+}
+
 .product_section .product_container {
   display: -webkit-box;
   display: -ms-flexbox;

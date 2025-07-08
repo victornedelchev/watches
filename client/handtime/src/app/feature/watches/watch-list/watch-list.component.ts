@@ -12,6 +12,17 @@ export class WatchListComponent implements OnInit {
   watchList: IWatch[] = [];
   latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
+  searchByWatchName = '';
+
+  get filteredWatchList(): IWatch[] {
+    if (!this.searchByWatchName.trim()) {
+      return this.watchList;
+    }
+
+    return this.watchList.filter(watch =>
+      watch.brand.toLowerCase().includes(this.searchByWatchName.toLowerCase())
+    );
+  }
 
   constructor(
     private titleService: Title,

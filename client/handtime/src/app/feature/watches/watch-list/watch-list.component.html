@@ -6,9 +6,18 @@
     <div class="product_heading">
       <h2>Top Sale Watches</h2>
     </div>
+    <form *ngIf="watchList.length > 0" class="search_form">
+      <input
+        type="text"
+        placeholder="Search Watches"
+        class="search_bar"
+        name="searchByWatchName"
+        [(ngModel)]="searchByWatchName"
+      />
+    </form>
     <div class="product_container">
       <app-watch-list-item
-        *ngFor="let watch of watchList"
+        *ngFor="let watch of filteredWatchList"
         [watch]="watch"
       ></app-watch-list-item>
     </div>
