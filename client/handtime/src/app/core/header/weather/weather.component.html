@@ -1,4 +1,8 @@
-<div class="temperature-container">
+<div *ngIf="isLoading">
+  Loading...
+</div>
+
+<div *ngIf="!isLoading" class="temperature-container">
   <span class="temperature">
     {{ !location ? "--" : location }}
     {{ !temperature ? "--" : temperature }}°c

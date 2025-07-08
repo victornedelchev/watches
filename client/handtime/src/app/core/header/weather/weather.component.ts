@@ -31,18 +31,21 @@ export class WeatherComponent implements OnInit {
   temperature!: number;
   location!: string;
   icon!: string;
+  isLoading: boolean = true;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.weatherService.getWeather$().subscribe({
       next: (data: IWeather) => {
+        this.isLoading = false;
         this.weatherInfo = data;
         this.temperature = Math.floor(this.weatherInfo.main.temp) || 0;
         this.location = this.weatherInfo.name;
         this.icon = icons[this.weatherInfo.weather[0].icon] || icons['01d'];
       },
       error: (err) => {
+        this.isLoading = false;
         console.error(err);
       }
     })
