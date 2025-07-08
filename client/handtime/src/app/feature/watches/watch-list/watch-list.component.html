@@ -12,7 +12,8 @@
         placeholder="Search Watches"
         class="search_bar"
         name="searchByWatchName"
-        [(ngModel)]="searchByWatchName"
+        #searchInput
+        (input)="onSearchInput(searchInput.value)"
       />
     </form>
     <div class="product_container">

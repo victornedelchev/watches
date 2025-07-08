@@ -14,6 +14,10 @@ export class WatchListComponent implements OnInit {
   isLoading: boolean = true;
   searchByWatchName = '';
 
+  onSearchInput(value: string): void {
+    this.searchByWatchName = value;
+  }
+
   get filteredWatchList(): IWatch[] {
     if (!this.searchByWatchName.trim()) {
       return this.watchList;
