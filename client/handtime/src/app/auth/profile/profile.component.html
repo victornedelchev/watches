@@ -10,7 +10,7 @@
         <span class="label">Email:</span>
         <span class="value">{{ currentUser?.email }}</span>
       </div>
-      <div class="profile-item">
+      <div *ngIf="currentUser?._createdOn" class="profile-item">
         <span class="label">Created At:</span>
         <span class="value">{{ currentUser?._createdOn | date: 'longDate'}}</span>
       </div>
