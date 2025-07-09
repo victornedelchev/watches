@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'get-weather', component: GetWeatherComponent, canActivate: [GuestGuard] },
+  { path: 'get-weather', component: GetWeatherComponent},
   {
     path: 'watches',
     loadChildren: () =>

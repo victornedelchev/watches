@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,9 +43,10 @@ export class GetWeatherComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle
   errorMessage = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private titleService: Title, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Get Weather Page');
     this.search('Novi pazar, BG');
   }
 
@@ -60,10 +62,10 @@ export class GetWeatherComponent implements OnInit {
       next: (data: IWeather) => {
         this.errorMessage = '';
         this.humidity = data.main.humidity,
-        this.winSpeed = data.wind.speed,
-        this.temperature = Math.floor(data.main.temp),
-        this.location = data.name,
-        this.icon = icons[data.weather[0].icon];
+          this.winSpeed = data.wind.speed,
+          this.temperature = Math.floor(data.main.temp),
+          this.location = data.name,
+          this.icon = icons[data.weather[0].icon];
         this.cityInput.nativeElement.value = '';
       },
       error: (err) => {

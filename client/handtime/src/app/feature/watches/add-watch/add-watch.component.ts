@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
+import { IWatch } from 'src/app/core/interfaces/watch';
 import { WatchService } from 'src/app/core/watch.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class AddWatchComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
   errorMessage: string = '';
 
-  constructor(private titleService: Title, private watchService: WatchService, private router: Router) {}
+  constructor(private titleService: Title, private watchService: WatchService, private router: Router) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Add New Watch Page');
@@ -27,7 +28,7 @@ export class AddWatchComponent implements OnInit {
     this.errorMessage = '';
 
     this.watchService.addWatch$(addWatchForm.value).subscribe({
-      next: (watch) => {
+      next: (watch: IWatch) => {
         addWatchForm.reset();
         this.titleService.setTitle(`Watch ${watch.brand} ${watch.model} added successfully`);
         this.router.navigate(['/watches']);
