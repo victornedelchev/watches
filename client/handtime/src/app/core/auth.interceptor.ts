@@ -13,6 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const token = this.storage.getItem<string>('access_token');
+    
     if (token) {
       const cloned = req.clone({
         setHeaders: {

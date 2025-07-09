@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="!isLoading" class="temperature-container">
-  <span class="temperature">
+  <span class="temperature" [class.hot]="isHot">
     {{ !location ? "--" : location }}
     {{ !temperature ? "--" : temperature }}°c
   </span>

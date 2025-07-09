@@ -15,12 +15,6 @@ export class HeaderComponent {
     return this.userService.isLoggedIn();
   }
 
-  // get currentUser(): IUser | null {
-  //   return this.userService.getCurrentUser();
-  // }
-
-
-
   constructor(private userService: UserService, private router: Router) { 
     this.userService.currentUser$.subscribe(user => this.currentUser = user)
   }

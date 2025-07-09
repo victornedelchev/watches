@@ -32,6 +32,7 @@ export class WeatherComponent implements OnInit {
   location!: string;
   icon!: string;
   isLoading: boolean = true;
+  isHot: boolean = false;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -43,6 +44,10 @@ export class WeatherComponent implements OnInit {
         this.temperature = Math.floor(this.weatherInfo.main.temp) || 0;
         this.location = this.weatherInfo.name;
         this.icon = icons[this.weatherInfo.weather[0].icon] || icons['01d'];
+
+        if (this.temperature > 25) {
+          this.isHot = true;
+        }
       },
       error: (err) => {
         this.isLoading = false;
