@@ -3,20 +3,20 @@ import { WeatherService } from '../../weather.service';
 import { IWeather } from '../../interfaces/weather';
 
 const icons: { [key: string]: string } = {
-  "01d": 'assets/images/weather/clear.png', // clear_icon_day
-  "01n": 'assets/images/weather/moon.png', // clear_icon_night
-  "02d": 'assets/images/weather/cloud.png', // cloud_icon_day
-  "02n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
-  "03d": 'assets/images/weather/cloud.png', // cloud_icon_day
-  "03n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
-  "04d": 'assets/images/weather/cloud.png', // cloud_icon_day
-  "04n": 'assets/images/weather/partly-cloudy-night.png', // cloud_icon_night
-  "09d": 'assets/images/weather/drizzle.png', //drizzle_icon_day,
-  "09n": 'assets/images/weather/night-drizzle.png',// drizzle_icon_night,
-  "10d": 'assets/images/weather/rain.png', // rain_icon_day,
-  "10n": 'assets/images/weather/night-raining.png',// rain_icon_night,
-  "13d": 'assets/images/weather/snow.png', // snow_icon_day,
-  "13n": 'assets/images/weather/night-snow.png',// snow_icon_night,
+  "01d": 'assets/images/weather/clear.png',
+  "01n": 'assets/images/weather/moon.png',
+  "02d": 'assets/images/weather/cloud.png',
+  "02n": 'assets/images/weather/partly-cloudy-night.png',
+  "03d": 'assets/images/weather/cloud.png',
+  "03n": 'assets/images/weather/partly-cloudy-night.png',
+  "04d": 'assets/images/weather/cloud.png',
+  "04n": 'assets/images/weather/partly-cloudy-night.png',
+  "09d": 'assets/images/weather/drizzle.png',
+  "09n": 'assets/images/weather/night-drizzle.png',
+  "10d": 'assets/images/weather/rain.png',
+  "10n": 'assets/images/weather/night-raining.png',
+  "13d": 'assets/images/weather/snow.png',
+  "13n": 'assets/images/weather/night-snow.png',
 };
 
 
