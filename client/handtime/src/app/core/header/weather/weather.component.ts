@@ -18,8 +18,6 @@ const icons: { [key: string]: string } = {
   "13d": 'assets/images/weather/snow.png',
   "13n": 'assets/images/weather/night-snow.png',
 };
-
-
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -33,18 +31,17 @@ export class WeatherComponent implements OnInit, OnDestroy {
   icon!: string;
   isLoading: boolean = true;
   isHot: boolean = false;
-  intervalId: any;
+  weatherInterval: any;
   minute: number = 60 * 1000;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.getWeather();
-    this.intervalId = setInterval(() => {
-      this.getWeather();
+    this.weatherInterval = setInterval(() => {
+      this.getWeather()
     }, this.minute);
   };
-
 
   getWeather(): void {
     this.weatherService.getWeather$().subscribe({
@@ -67,8 +64,8 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+    if (this.weatherInterval) {
+      clearInterval(this.weatherInterval);
     }
   }
 }

@@ -42,15 +42,21 @@ export class GetWeatherComponent implements OnInit {
   icon!: string;
   faExclamationTriangle = faExclamationTriangle
   errorMessage = '';
+  lastCity: string = 'Novi pazar, BG';
+  private weatherInterval: any;
+  minute: number = 60 * 1000;
 
   constructor(private titleService: Title, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Get Weather Page');
-    this.search('Novi pazar, BG');
+    this.search(this.lastCity);
+    this.weatherInterval = setInterval(() => {
+      this.search(this.lastCity, false);
+    }, this.minute);
   }
 
-  search(city: string) {
+  search(city: string, updateLastCity: boolean = true) {
     if (!city) {
       this.errorMessage = 'Please enter a city name!';
       return
@@ -62,11 +68,15 @@ export class GetWeatherComponent implements OnInit {
       next: (data: IWeather) => {
         this.errorMessage = '';
         this.humidity = data.main.humidity,
-          this.winSpeed = data.wind.speed,
-          this.temperature = Math.floor(data.main.temp),
-          this.location = data.name,
-          this.icon = icons[data.weather[0].icon];
+        this.winSpeed = data.wind.speed,
+        this.temperature = Math.floor(data.main.temp),
+        this.location = data.name,
+        this.icon = icons[data.weather[0].icon];
         this.cityInput.nativeElement.value = '';
+
+        if (updateLastCity) {
+          this.lastCity = city;
+        }
       },
       error: (err) => {
         this.weatherData = null;
@@ -80,4 +90,9 @@ export class GetWeatherComponent implements OnInit {
     this.search(this.cityInput.nativeElement.value);
   }
 
+  ngOnDestroy(): void {
+    if (this.weatherInterval) {
+      clearInterval(this.weatherInterval);
+    }
+  }
 }
