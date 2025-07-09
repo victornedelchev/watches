@@ -27,5 +27,9 @@
         </div>
       </div>
     </div>
+    <p *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+      <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+    </p>
   </div>
 </div>

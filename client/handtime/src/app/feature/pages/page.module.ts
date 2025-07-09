@@ -8,6 +8,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SharedModule } from "../../shared/shared.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetWeatherComponent } from './get-weather/get-weather.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { GetWeatherComponent } from './get-weather/get-weather.component';
     NotFoundComponent,
     GetWeatherComponent,
   ],
-  imports: [CommonModule, RouterModule, SharedModule],
+  imports: [CommonModule, RouterModule, SharedModule, FontAwesomeModule],
   exports: [HomeComponent, AboutComponent],
 })
-export class PageModule {}
+export class PageModule { }

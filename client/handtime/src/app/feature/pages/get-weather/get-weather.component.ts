@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 import { IWeather } from 'src/app/core/interfaces/weather';
 import { environment } from 'src/environments/environment.development';
 
@@ -36,6 +39,8 @@ export class GetWeatherComponent implements OnInit {
   temperature!: number;
   location!: string;
   icon!: string;
+  faExclamationTriangle = faExclamationTriangle
+  errorMessage = '';
 
   constructor(private http: HttpClient) { }
 
@@ -45,7 +50,7 @@ export class GetWeatherComponent implements OnInit {
 
   search(city: string) {
     if (!city) {
-      alert('Please enter a city name!');
+      this.errorMessage = 'Please enter a city name!';
       return
     }
 
@@ -53,16 +58,18 @@ export class GetWeatherComponent implements OnInit {
 
     this.http.get<IWeather>(WEATHER_URL).subscribe({
       next: (data: IWeather) => {
+        this.errorMessage = '';
         this.humidity = data.main.humidity,
-          this.winSpeed = data.wind.speed,
-          this.temperature = Math.floor(data.main.temp),
-          this.location = data.name,
-          this.icon = icons[data.weather[0].icon];
-          this.cityInput.nativeElement.value = '';
+        this.winSpeed = data.wind.speed,
+        this.temperature = Math.floor(data.main.temp),
+        this.location = data.name,
+        this.icon = icons[data.weather[0].icon];
+        this.cityInput.nativeElement.value = '';
       },
       error: (err) => {
         this.weatherData = null;
-        alert(err.error.message || 'Error fetching weather data');
+        console.log(err);
+        this.errorMessage = err.error.message || 'Error fetching weather data';
       }
     })
   }
