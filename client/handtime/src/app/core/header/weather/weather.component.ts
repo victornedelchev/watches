@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WeatherService } from '../../weather.service';
 import { IWeather } from '../../interfaces/weather';
 
@@ -26,17 +26,27 @@ const icons: { [key: string]: string } = {
   styleUrls: ['./weather.component.css']
 })
 
-export class WeatherComponent implements OnInit {
+export class WeatherComponent implements OnInit, OnDestroy {
   weatherInfo!: IWeather;
   temperature!: number;
   location!: string;
   icon!: string;
   isLoading: boolean = true;
   isHot: boolean = false;
+  intervalId: any;
+  minute: number = 60 * 1000;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
+    this.getWeather();
+    this.intervalId = setInterval(() => {
+      this.getWeather();
+    }, this.minute);
+  };
+
+
+  getWeather(): void {
     this.weatherService.getWeather$().subscribe({
       next: (data: IWeather) => {
         this.isLoading = false;
@@ -54,5 +64,11 @@ export class WeatherComponent implements OnInit {
         console.error(err);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
