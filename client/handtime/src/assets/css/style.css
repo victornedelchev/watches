@@ -524,7 +524,7 @@ a:focus {
   margin-top: 35px;
 }
 
-.about_section .detail-box a {
+.about_section .detail-box button {
   display: inline-block;
   padding: 8px 35px;
   background-color: #8019c8;

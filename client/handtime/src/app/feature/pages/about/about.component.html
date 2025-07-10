@@ -14,12 +14,17 @@
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-            <h2>About Our Shop</h2>
-            <p>
-              There are many variations of passages of Lorem Ipsum There are
-              many variations of passages of Lorem Ipsum
+            <h2>About This App</h2>
+            <p *ngIf="readMore">{{ description | slice : 0 : 137 }}...</p>
+            <p *ngIf="!readMore">
+              This is an application for lovers and admirers of wristwatches.
+              Here you can browse watches added by other users, as well as add
+              comments about them. After registering, you have the opportunity
+              to add an unlimited number of watches that you like.
             </p>
-            <a href=""> Read More </a>
+            <button (click)="toggleReadMore()">
+              {{ readMore ? "Read More" : "Real Less" }}
+            </button>
           </div>
         </div>
       </div>
