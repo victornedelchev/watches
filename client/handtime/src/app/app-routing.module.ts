@@ -6,14 +6,14 @@ import { TestimonialComponent } from './feature/pages/testimonial/testimonial.co
 import { ContactUsComponent } from './feature/pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './feature/pages/not-found/not-found.component';
 import { GetWeatherComponent } from './feature/pages/get-weather/get-weather.component';
-import { AuthGuard } from './core/guards/auth.guards';
-import { GuestGuard } from './core/guards/guest.gards';
+import { WorldClockComponent } from './feature/pages/world-clock/world-clock.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'get-weather', component: GetWeatherComponent},
+  { path: 'get-weather', component: GetWeatherComponent },
+  { path: 'world-clock', component: WorldClockComponent },
   {
     path: 'watches',
     loadChildren: () =>
