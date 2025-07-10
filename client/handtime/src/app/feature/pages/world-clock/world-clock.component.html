@@ -1,0 +1,9 @@
+<div class="world-clock-container">
+  <h2 class="title">World Clock</h2>
+  <div class="clock-container">
+    <div *ngFor="let city of cities" class="city-card">
+      <div class="city-name">{{ city.name }}</div>
+      <div class="city-time">{{ city.time }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+.world-clock-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  background: url("/assets/images/free-colorful-stripes-background-picjumbo-com.jpg")
+    no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.clock-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  width: 100%;
+}
+
+.city-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.city-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.city-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1717cf;
+}
+
+.city-name:hover {
+  color: #fff;
+}
+
+.city-time {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.city-time:hover {
+  color: #bfeff6;
+}
