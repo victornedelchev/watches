@@ -34,7 +34,6 @@ const WEATHER_API_KEY = environment.WEATHER_API_KEY;
 export class GetWeatherComponent implements OnInit {
   @ViewChild('cityInput') cityInput!: ElementRef;
 
-  weatherData: IWeather | null = null;
   humidity!: number;
   winSpeed!: number;
   temperature!: number;
@@ -79,8 +78,6 @@ export class GetWeatherComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.weatherData = null;
-        console.log(err);
         this.errorMessage = err.error.message || 'Error fetching weather data';
       }
     })
