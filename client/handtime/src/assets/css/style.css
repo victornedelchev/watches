@@ -130,7 +130,7 @@ a:focus {
 }
 
 .user {
-  margin-left:15px;
+  margin-left: 15px;
   color: #8019c8;
 }
 
@@ -538,6 +538,11 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: #541184;
+}
+
+.half {
+  width: 80vw;
+  height: 50vh;
 }
 
 .product_section {
