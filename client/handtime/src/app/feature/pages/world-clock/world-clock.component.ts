@@ -15,7 +15,7 @@ export class WorldClockComponent implements OnInit, OnDestroy {
     { name: 'London', zone: 'Europe/London', time: '' },
     { name: 'Paris', zone: 'Europe/Paris', time: '' },
     { name: 'Berlin', zone: 'Europe/Berlin', time: '' },
-    { name: 'Berlin', zone: 'Europe/Berlin', time: '' },
+    { name: 'Amsterdam', zone: 'Europe/Berlin', time: '' },
     { name: 'Moscow', zone: 'Europe/Moscow', time: '' },
     { name: 'Dubai', zone: 'Asia/Dubai', time: '' },
     { name: 'Beijing', zone: 'Asia/Shanghai', time: '' },
