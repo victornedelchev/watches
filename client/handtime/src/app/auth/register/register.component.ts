@@ -15,7 +15,7 @@ import {
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { emailValidator, passwordMismatch } from './utils';
+import { passwordMismatch } from '../utils';
 import { UserService } from 'src/app/core/user.service';
 
 @Component({
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(3),
     ]),
-    email: new FormControl('', [Validators.required, emailValidator]),
+    email: new FormControl('', [Validators.required]),
     passwords: new FormGroup({
       password: this.passwordControl,
       rePassword: new FormControl('', [

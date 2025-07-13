@@ -14,7 +14,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { emailValidator } from '../register/utils';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
   loginFormGroup: FormGroup = this.formBuilder.group({
-    email: new FormControl('', [Validators.required, emailValidator]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
