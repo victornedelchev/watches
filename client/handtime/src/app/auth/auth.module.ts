@@ -9,9 +9,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WatchesModule } from '../feature/watches/watches.module';
 import { SharedModule } from "../shared/shared.module";
+import { EmailValidatorDirective } from './email-validator.directive';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ProfileComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EmailValidatorDirective],
   imports: [
     CommonModule,
     RouterModule,
