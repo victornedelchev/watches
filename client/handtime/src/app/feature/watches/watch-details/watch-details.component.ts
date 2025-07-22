@@ -135,6 +135,7 @@ export class WatchDetailsComponent implements OnInit {
   cancelEditComment(): void {
     this.editingCommentId = '';
     this.editCommentText = '';
+    this.isEditMode = false;
   }
 
   saveEditComment(commentId: string): void {
