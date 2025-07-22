@@ -535,11 +535,6 @@ a:focus {
   border: none;
   margin-top: 35px;
 }
-
-.about_section .detail-box a:hover {
-  background-color: #541184;
-}
-
 .half {
   width: 80vw;
   height: 50vh;

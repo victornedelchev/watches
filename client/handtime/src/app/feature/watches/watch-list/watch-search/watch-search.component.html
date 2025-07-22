@@ -1,0 +1,11 @@
+<form class="search_form">
+  <input
+    type="text"
+    placeholder="Search by brand..."
+    class="search_bar"
+    name="searchByWatchName"
+    #searchInput
+    [(ngModel)]="searchByWatchBrand"
+    (input)="onSearchTextChange()"
+  />
+</form>

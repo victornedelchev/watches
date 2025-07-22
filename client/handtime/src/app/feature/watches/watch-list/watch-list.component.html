@@ -6,22 +6,19 @@
     <div class="product_heading">
       <h2>Top Sale Watches</h2>
     </div>
-    <form *ngIf="watchList.length > 0" class="search_form">
-      <input
-        type="text"
-        placeholder="Search Watches"
-        class="search_bar"
-        name="searchByWatchName"
-        #searchInput
-        (input)="onSearchInput(searchInput.value)"
-      />
-    </form>
+
+    <app-watch-search
+      *ngIf="watchList.length > 0"
+      (searchBrandTextChange)="onSearchInput($event)"
+    ></app-watch-search>
+
     <div class="product_container">
       <app-watch-list-item
         *ngFor="let watch of filteredWatchList"
         [watch]="watch"
       ></app-watch-list-item>
     </div>
+
     <div *ngIf="watchList.length === 0">
       <div class="product_container">
         <p class="no-watches">You haven't added any watches yet.</p>

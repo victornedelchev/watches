@@ -12,19 +12,19 @@ export class WatchListComponent implements OnInit {
   watchList: IWatch[] = [];
   latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
-  searchByWatchName = '';
+  searchByWatchNameText: string = '';
 
-  onSearchInput(value: string): void {
-    this.searchByWatchName = value;
+  onSearchInput(searchValue: string): void {
+    this.searchByWatchNameText = searchValue;
   }
 
   get filteredWatchList(): IWatch[] {
-    if (!this.searchByWatchName.trim()) {
+    if (!this.searchByWatchNameText.trim()) {
       return this.watchList;
     }
 
     return this.watchList.filter(watch =>
-      watch.brand.toLowerCase().includes(this.searchByWatchName.toLowerCase())
+      watch.brand.toLowerCase().includes(this.searchByWatchNameText.toLowerCase())
     );
   }
 

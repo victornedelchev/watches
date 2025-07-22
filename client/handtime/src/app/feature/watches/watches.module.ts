@@ -16,6 +16,7 @@ import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
 import { EditModalComponent } from './edit-watch/edit-modal/edit-modal.component';
 import { CommentDeleteModalComponent } from './watch-details/comment-delete-modal/comment-delete-modal.component';
 import { WatchDeleteModalComponent } from './watch-details/watch-delete-modal/watch-delete-modal.component';
+import { WatchSearchComponent } from './watch-list/watch-search/watch-search.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WatchDeleteModalComponent } from './watch-details/watch-delete-modal/wa
     EditModalComponent,
     WatchDeleteModalComponent,
     CommentDeleteModalComponent,
+    WatchSearchComponent,
   ],
   imports: [
     CommonModule,
