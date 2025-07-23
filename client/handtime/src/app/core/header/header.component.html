@@ -69,7 +69,11 @@
               >Logout</a
             >
           </li>
-          <li class="nav-item user" *ngIf="isLogged">
+          <li
+            class="nav-item user"
+            [routerLinkActive]="'active'"
+            *ngIf="isLogged"
+          >
             <a class="nav-link" routerLink="/user/profile"
               >WELCOME {{ currentUser?.username | uppercase }}</a
             >
