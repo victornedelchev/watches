@@ -50,14 +50,13 @@ export class LoginComponent implements OnInit {
   loginHandler(): void {
     this.errorMessage = '';
     this.userService.login$(this.loginFormGroup.value).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigate(['/watches']);
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed. Please try again.';
       },
     })
-   
   }
 
   viewPass(): void {

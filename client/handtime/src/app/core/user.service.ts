@@ -62,7 +62,7 @@ export class UserService {
       })
       .pipe(
         map((response) => response.body),
-        filter((user): user is IUser & { token: string } => user !== null),
+        filter((user): user is IUser & { accessToken: string } => user !== null),
         tap((user) => {
           if (user.accessToken) {
             localStorage.setItem('access_token', user.accessToken);
