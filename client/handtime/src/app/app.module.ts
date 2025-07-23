@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { PageModule } from './feature/pages/page.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './core/auth.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { AuthInterceptor } from './core/auth.interceptor';
     CoreModule,
     PageModule,
     SharedModule,
+    NgbModule,
   ],
   providers: [
     {
