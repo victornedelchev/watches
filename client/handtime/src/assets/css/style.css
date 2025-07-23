@@ -129,7 +129,11 @@ a:focus {
   transition: all 0.3s;
 }
 
-.user {
+.user{
+  margin-left: 15px;
+}
+
+.guest {
   margin-left: 15px;
   color: #8019c8;
 }

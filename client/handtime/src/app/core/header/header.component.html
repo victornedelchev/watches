@@ -70,9 +70,11 @@
             >
           </li>
           <li class="nav-item user" *ngIf="isLogged">
-            WELCOME {{ currentUser?.username | uppercase }}
+            <a class="nav-link" routerLink="/user/profile"
+              >WELCOME {{ currentUser?.username | uppercase }}</a
+            >
           </li>
-          <li class="nav-item user" *ngIf="!isLogged">WELCOME GUEST</li>
+          <li class="nav-item guest" *ngIf="!isLogged">WELCOME GUEST</li>
         </ul>
         <div
           class="user_optio_box"
