@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appHover]'
@@ -6,6 +6,9 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 export class hoverDirective {
 
   constructor(private element: ElementRef, private renderer: Renderer2) { }
+
+  @HostBinding('style.backgroundColor') backgroundColor: string = '#f0f0f0';
+  @HostBinding('style.padding') padding: string = '3px';
 
   @HostListener('mouseenter') onMouseOver() {
     this.renderer.setStyle(this.element.nativeElement, 'padding', '15px');
