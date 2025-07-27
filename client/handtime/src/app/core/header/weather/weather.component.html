@@ -2,10 +2,10 @@
   Loading...
 </div>
 
-<div *ngIf="!isLoading" class="temperature-container">
+<div *ngIf="!isLoading" class="temperature-container" appHover>
   <span class="temperature" [class.hot]="isHot">
     {{ !location ? "--" : location }}
-    {{ !temperature ? "--" : temperature }}°c
+    {{ !temperature ? "--" : temperature }}°C
   </span>
   <img [src]="icon" alt="weather-icon" class="weather-icon" />
 </div>
