@@ -43,15 +43,17 @@ export class WatchDetailsComponent implements OnInit {
     return !!this.userService.getCurrentUser();
   }
 
+  get watchId(): string {
+    return this.activatedRoute.snapshot.params['_id'];
+  }
+
   ngOnInit(): void {
     this.titleService.setTitle('Watch Details Page');
     this.loadWatchAndComments();
   }
 
   private loadWatchAndComments(): void {
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.watchService.loadWatchById$(watchId).subscribe({
+    this.watchService.loadWatchById$(this.watchId).subscribe({
       next: (data: IWatch) => {
         this.isLoading = false;
         this.watch = data;
@@ -63,7 +65,7 @@ export class WatchDetailsComponent implements OnInit {
       },
     });
 
-    this.commentService.getAllComments$(watchId).subscribe({
+    this.commentService.getAllComments$(this.watchId).subscribe({
       next: (data: IComment[]) => {
         this.isLoading = false;
         this.comments = data;
@@ -94,9 +96,7 @@ export class WatchDetailsComponent implements OnInit {
   }
 
   confirmDeleteWatch(): void {
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.watchService.deleteWatchById$(watchId).subscribe({
+    this.watchService.deleteWatchById$(this.watchId).subscribe({
       next: () => this.router.navigate(['/watches']),
       error: (err) => console.error(err),
     })
@@ -107,9 +107,7 @@ export class WatchDetailsComponent implements OnInit {
   addComment(addCommentForm: NgForm) {
     this.errorMessage = '';
 
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.commentService.createComment$(watchId, addCommentForm.value.comment).subscribe({
+    this.commentService.createComment$(this.watchId, addCommentForm.value.comment).subscribe({
       next: (createdComment: IComment) => {
         createdComment.author = {
           _id: this.currentUser!._id,
@@ -140,9 +138,7 @@ export class WatchDetailsComponent implements OnInit {
 
   saveEditComment(commentId: string): void {
     this.errorMessage = '';
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.commentService.editCommentById$(watchId, commentId, this.editCommentText).subscribe({
+    this.commentService.editCommentById$(this.watchId, commentId, this.editCommentText).subscribe({
 
       next: (updatedComment: IComment) => {
         const index = this.comments.findIndex(comment => comment._id === commentId);

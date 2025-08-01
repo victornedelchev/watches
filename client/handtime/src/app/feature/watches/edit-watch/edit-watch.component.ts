@@ -29,12 +29,14 @@ export class EditWatchComponent implements OnInit {
     private router: Router
   ) { }
 
+  get watchId(): string {
+    return this.activatedRoute.snapshot.params['_id'];
+  }
+
   ngOnInit(): void {
     this.titleService.setTitle('Edit Watch Page');
 
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.watchService.loadWatchById$(watchId).subscribe((watch: IWatch) => {
+    this.watchService.loadWatchById$(this.watchId).subscribe((watch: IWatch) => {
       this.editWatchForm.form.patchValue({
         brand: watch.brand,
         model: watch.model,
@@ -53,15 +55,13 @@ export class EditWatchComponent implements OnInit {
   }
 
   onModalSave() {
-    const watchId = this.activatedRoute.snapshot.params['_id'];
-
-    this.watchService.editWatchById$(watchId, this.pendingEditData).subscribe({
+    this.watchService.editWatchById$(this.watchId, this.pendingEditData).subscribe({
       next: () => {
         this.isModalOpen = false;
         this.pendingEditData = null;
         this.selectedWatch = null;
         this.editWatchForm.reset();
-        this.router.navigate([`/watches/${watchId}`])
+        this.router.navigate([`/watches/${this.watchId}`])
       },
       error: (err) => {
         this.errorMessage = err;
