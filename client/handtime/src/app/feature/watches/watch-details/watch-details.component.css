@@ -106,6 +106,7 @@
   background-color: #fff;
   color: #333;
   border: 2px solid #333;
+  text-decoration: none;
 }
 
 .btn-edit:hover {
