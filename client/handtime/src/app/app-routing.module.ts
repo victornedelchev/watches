@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './feature/pages/home/home.component';
 import { AboutComponent } from './feature/pages/about/about.component';
-import { ContactUsComponent } from './feature/pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './feature/pages/not-found/not-found.component';
 import { GetWeatherComponent } from './feature/pages/get-weather/get-weather.component';
 import { WorldClockComponent } from './feature/pages/world-clock/world-clock.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
-  { path: 'contact', component: ContactUsComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
