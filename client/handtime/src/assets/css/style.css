@@ -441,14 +441,11 @@ a:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   font-family: "Arial", sans-serif;
   color: #333;
   background-color: #f4f4f9;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
 }
 
 .about_section {
@@ -887,6 +884,7 @@ a:focus {
 .info_section {
   background-color: #0f1521;
   color: #ffffff;
+  width: 81.3%;
 }
 
 .info_section .info_logo {
@@ -955,40 +953,8 @@ a:focus {
   margin-right: 12px;
 }
 
-.info_section .info_form form input {
-  outline: none;
-  width: 100%;
-  padding: 7px 10px;
-}
-
-.info_section .info_form form button {
-  display: inline-block;
-  padding: 8px 30px;
-  background-color: #8019c8;
-  color: #ffffff;
-  border-radius: 0;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  border: none;
-  margin-top: 15px;
-  text-transform: uppercase;
-  font-size: 15px;
-}
-
-.info_section .info_form form button:hover {
-  background-color: #541184;
-}
-
-.info_section .info_form .social_box {
-  margin-top: 35px;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.info_section .info_form .social_box a {
-  margin-right: 25px;
+.info_section .row {
+  justify-content: center;
 }
 
 /* footer section*/
