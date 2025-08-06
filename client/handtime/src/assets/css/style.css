@@ -436,7 +436,6 @@ a:focus {
 }
 
 .about-container,
-.testimonial-container,
 .contact_us-container {
   display: flex;
   flex-direction: column;
