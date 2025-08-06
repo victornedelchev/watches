@@ -335,6 +335,25 @@ a:focus {
   background-color: #541184;
 }
 
+.detail-box .liked {
+  background-color: red;
+}
+
+.detail-box button {
+  padding: 5px 10px;
+  background-color: dodgerblue;
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+}
+
+
+
+like-count {
+  display: flex;
+  flex-direction: row;
+}
+
 .slider_section .img-box img {
   width: 100%;
 }
