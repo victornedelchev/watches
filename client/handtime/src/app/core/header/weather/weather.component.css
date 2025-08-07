@@ -27,6 +27,10 @@
   color: blue;
 }
 
+.temperature:hover {
+  color: white;
+}
+
 .weather-icon {
   width: 25px;
   height: 25px;
