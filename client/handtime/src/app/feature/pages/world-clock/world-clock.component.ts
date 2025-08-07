@@ -10,12 +10,14 @@ import { DateTime } from 'luxon';
 export class WorldClockComponent implements OnInit, OnDestroy {
   cities = [
     { name: 'Los Angeles', zone: 'America/Los_Angeles', time: '' },
+    { name: 'Mexico', zone: 'America/Mexico_City', time: '' },
     { name: 'New York', zone: 'America/New_York', time: '' },
     { name: 'Rio De Janeiro', zone: 'America/Sao_Paulo', time: '' },
     { name: 'London', zone: 'Europe/London', time: '' },
     { name: 'Paris', zone: 'Europe/Paris', time: '' },
-    { name: 'Berlin', zone: 'Europe/Berlin', time: '' },
-    { name: 'Amsterdam', zone: 'Europe/Berlin', time: '' },
+    { name: 'Rome', zone: 'Europe/Rome', time: '' },
+    { name: 'Sofia', zone: 'Europe/Sofia', time: '' },
+    { name: 'Istanbul', zone: 'Europe/Istanbul', time: '' },
     { name: 'Moscow', zone: 'Europe/Moscow', time: '' },
     { name: 'Dubai', zone: 'Asia/Dubai', time: '' },
     { name: 'Beijing', zone: 'Asia/Shanghai', time: '' },
