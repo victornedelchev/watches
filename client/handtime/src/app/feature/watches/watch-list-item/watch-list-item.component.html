@@ -9,7 +9,9 @@
         <h5><span>$</span> {{ watch?.price }}</h5>
       </div>
       <div class="like">
-        <button *ngIf="isLogged" (click)="toggleLike()" [class.liked]="isLiked">{{isLiked ? 'Unlike' : 'Like'}}</button>
+        <button *ngIf="isLogged" (click)="toggleLike()" [class.liked]="isLiked">
+          {{ isLiked ? "Unlike" : "Like" }}
+        </button>
         <div class="like-count">
           <i class="fa" [ngClass]="isLiked ? 'fa-heart' : 'fa-heart-o'"></i>
           {{ likeCount }}

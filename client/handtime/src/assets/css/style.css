@@ -339,6 +339,11 @@ a:focus {
   background-color: red;
 }
 
+.detail-box .liked:hover {
+  background-color: #d64040;
+  
+}
+
 .detail-box button {
   padding: 5px 10px;
   background-color: dodgerblue;
@@ -347,7 +352,9 @@ a:focus {
   border: none;
 }
 
-
+.detail-box button:hover {
+  background-color: #0056b3;
+}
 
 like-count {
   display: flex;
@@ -702,6 +709,7 @@ like-count {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
+  text-decoration: none;
 }
 
 .product_section .product_container .box .btn-box a:hover {
