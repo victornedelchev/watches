@@ -32,6 +32,15 @@
                 </div>
               </div>
 
+              <div *ngIf="!errorMessage">
+                Total likes: <b>{{ likesCount }}</b> 
+              </div>
+
+              <p *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+                <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+              </p>
+
               <div
                 *ngIf="watch?._ownerId === currentUser?._id"
                 class="details-actions"

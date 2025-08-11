@@ -10,6 +10,8 @@ import { WatchService } from 'src/app/core/watch.service';
 import { IComment } from 'src/app/core/interfaces/comment';
 import { IUser } from 'src/app/core/interfaces/user';
 import { IWatch } from 'src/app/core/interfaces/watch';
+import { LikeService } from 'src/app/core/like.service';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-watch-details',
@@ -21,6 +23,7 @@ export class WatchDetailsComponent implements OnInit {
   currentUser: IUser | null = this.userService.getCurrentUser();
   isLoading: boolean = true;
   errorMessage: string = '';
+  likesCount: number = 0;
   comments: IComment[] = [];
   isOwner: boolean = false;
   isWatchDeleteModalOpen: boolean = false;
@@ -29,12 +32,14 @@ export class WatchDetailsComponent implements OnInit {
   editingCommentId: string = '';
   editCommentText: string = '';
   isEditMode: boolean = false;
+  faExclamationTriangle = faExclamationTriangle
 
   constructor(
     private titleService: Title,
     private watchService: WatchService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
+    private likeService: LikeService,
     private commentService: CommentService,
     private router: Router,
   ) { }
@@ -49,7 +54,21 @@ export class WatchDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Watch Details Page');
+    this.loadLikes();
     this.loadWatchAndComments();
+  }
+
+  loadLikes(): void {
+    this.likeService.getAllLikes$(this.watchId).subscribe({
+      next: (likes) => {
+        this.likesCount = likes.length;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Error loading likes';
+        console.error('Error loading likes', err);
+      }
+    });
+
   }
 
   private loadWatchAndComments(): void {
