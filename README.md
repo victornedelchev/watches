@@ -47,6 +47,48 @@ A modern Angular-based web application for managing and showcasing watch collect
 - Interactive components
 - Loading states and animations
 
+## 🛠️ Technologies Used
+
+### Frontend
+
+- **Angular 16.2.0** - Frontend framework
+- **TypeScript 5.1.3** - Programming language
+- **Bootstrap 5.2.3** - CSS framework
+- **FontAwesome** - Icon library
+- **RxJS** - Reactive programming
+- **Luxon** - Date/time manipulation
+- **Google Maps API** - Location services
+
+### Backend
+
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **RESTful API** - API architecture
+- **JSON** - Data storage
+
+## 📁 Project Structure
+
+```
+
+# Angular frontend application
+
+
+ # Authentication modules
+ # Core services and interfaces
+ # Feature modules
+ # Main pages
+ # Watch management
+ # Shared components
+ # Static assets
+ # Environment configuration
+
+ # Node.js backend
+ # JSON data files
+ # Main server file
+
+
+```
+
 ## 🚀 Installation
 
 ### Prerequisites
