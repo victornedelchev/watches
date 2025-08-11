@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 import { CommentService } from 'src/app/core/comment.service';
 import { UserService } from 'src/app/core/user.service';
 import { WatchService } from 'src/app/core/watch.service';
@@ -11,7 +13,6 @@ import { IComment } from 'src/app/core/interfaces/comment';
 import { IUser } from 'src/app/core/interfaces/user';
 import { IWatch } from 'src/app/core/interfaces/watch';
 import { LikeService } from 'src/app/core/like.service';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-watch-details',

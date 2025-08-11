@@ -15,6 +15,7 @@ export class WatchListItemComponent implements OnInit {
   likeCount: number = 0;
   isLiked: boolean = false;
   likeId: string | null = null;
+  isOwner: boolean = false;
   currentUserId: string | null = null;
 
   get isLogged(): boolean {
@@ -26,8 +27,9 @@ export class WatchListItemComponent implements OnInit {
   ngOnInit(): void {
     this.userService.currentUser$.subscribe((user) => {
       this.currentUserId = user?._id || null;
-      this.loadLikes();
     });
+    this.isOwner = this.watch?._ownerId === this.currentUserId;
+    this.loadLikes();
   }
 
   loadLikes() {
