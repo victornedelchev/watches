@@ -5,6 +5,8 @@ A modern Angular-based web application for managing and showcasing watch collect
 ## 📋 Table of Contents
 
 - [Features](#-features)
+- [Technologies Used](#-technologies-used)
+- [Project Structure](#-project-structure)
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [API Endpoints](#-api-endpoints)
