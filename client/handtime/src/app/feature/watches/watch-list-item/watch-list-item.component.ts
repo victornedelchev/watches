@@ -27,7 +27,7 @@ export class WatchListItemComponent implements OnInit {
     this.userService.currentUser$.subscribe((user) => {
       this.currentUserId = user?._id || null;
       this.loadLikes();
-    })
+    });
   }
 
   loadLikes() {
@@ -36,18 +36,18 @@ export class WatchListItemComponent implements OnInit {
       const userLike = likes.find(like => like._ownerId === this.currentUserId);
       this.isLiked = !!userLike;
       this.likeId = userLike?._id || null;
-    })
+    });
   }
 
   toggleLike() {
     if (this.isLiked && this.likeId) {
       this.likeService.unlikeWatch$(this.likeId).subscribe(() => {
         this.loadLikes();
-      })
+      });
     } else {
       this.likeService.likeWatch$(this.watch?._id || '').subscribe(() => {
         this.loadLikes();
-      })
+      });
     }
   }
 }
