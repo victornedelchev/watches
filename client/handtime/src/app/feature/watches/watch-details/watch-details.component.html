@@ -33,12 +33,17 @@
               </div>
 
               <div *ngIf="!errorMessage">
-                Total likes: <b>{{ likesCount }}</b> 
+                Total likes:
+                <i class="fa" [ngClass]="'fa-heart-o'"></i>
+                <b class="likes">{{ likesCount }}</b>
               </div>
 
               <p *ngIf="errorMessage" class="error-message">
                 {{ errorMessage }}
-                <fa-icon *ngIf="errorMessage" [icon]="faExclamationTriangle"></fa-icon>
+                <fa-icon
+                  *ngIf="errorMessage"
+                  [icon]="faExclamationTriangle"
+                ></fa-icon>
               </p>
 
               <div
@@ -91,7 +96,10 @@
               <p *ngIf="editComment.errors?.['required']" class="error-message">
                 Comment is required!
               </p>
-              <p *ngIf="editComment.errors?.['minlength']" class="error-message">
+              <p
+                *ngIf="editComment.errors?.['minlength']"
+                class="error-message"
+              >
                 Comment must be at least 2 characters long!
               </p>
             </ng-container>
@@ -108,8 +116,6 @@
               </button>
             </div>
           </div>
-
-
 
           <div *ngIf="editingCommentId !== comment._id">
             <p class="comment-text">{{ comment.comment }}</p>
@@ -140,11 +146,14 @@
           </div>
         </li>
       </ng-container>
-      
     </ul>
     <p *ngIf="comments.length === 0">No comments yet.</p>
     <div *ngIf="isLoggedIn && !isOwner" className="add-comment-section">
-      <form *ngIf="!isEditMode" #addCommentForm="ngForm" (ngSubmit)="addComment(addCommentForm)">
+      <form
+        *ngIf="!isEditMode"
+        #addCommentForm="ngForm"
+        (ngSubmit)="addComment(addCommentForm)"
+      >
         <textarea
           name="comment"
           class="comment-textarea"
@@ -176,7 +185,7 @@
     </div>
   </div>
 
-  <app-comment-delete-modal 
+  <app-comment-delete-modal
     *ngIf="isCommentDeleteModalOpen"
     (confirm)="deleteComment(commentToDelete)"
     (cancel)="closeCommentDeleteModal()"

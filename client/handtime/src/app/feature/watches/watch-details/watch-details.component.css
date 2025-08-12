@@ -91,6 +91,11 @@
   color: #eb422bd6;
 }
 
+.likes {
+  margin-left: 4px;
+  font-weight: bold;
+}
+
 .btn-edit,
 .btn-delete {
   padding: 12px 30px;
