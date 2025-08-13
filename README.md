@@ -177,8 +177,8 @@ The application will be available at `http://localhost:4200`
 ### Comments
 - `GET /data/comments` - Get all comments
 - `POST /data/comments` - Add comment
-- `PUT` /data/comments/:id - Update comment
-- `DELETE` /data/comments/:id - Delete comment
+- `PUT /data/comments/:id` - Update comment
+- `DELETE /data/comments/:id` - Delete comment
 
 ## 👨‍💻 Author
 
