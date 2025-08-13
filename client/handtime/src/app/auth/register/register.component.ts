@@ -12,10 +12,11 @@ import {
   faExclamationTriangle,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { passwordMismatch } from '../utils';
+import { noSpaceAllowed, passwordMismatch } from '../utils';
 import { UserService } from 'src/app/core/user.service';
 
 @Component({
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
   registerFormGroup: FormGroup = this.formBuilder.group({
     username: new FormControl('', [
       Validators.required,
+      noSpaceAllowed,
       Validators.minLength(3),
     ]),
     email: new FormControl('', [Validators.required]),

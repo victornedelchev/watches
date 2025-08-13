@@ -35,6 +35,15 @@
         </p>
         <p
           class="error-message"
+          *ngIf="(!registerFormGroup.controls['username'].errors?.['required'] 
+          && !registerFormGroup.controls['username'].errors?.['minlength'])
+          && registerFormGroup.controls['username'].errors?.['noSpaceAllowed']"
+        >
+          Username cannot contain a space!
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+        <p
+          class="error-message"
           *ngIf="registerFormGroup.controls['username'].errors?.['minlength']"
         >
           Username must be at least 3 characters long!
