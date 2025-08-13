@@ -10,7 +10,6 @@ A modern Angular-based web application for managing and showcasing watch collect
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [API Endpoints](#-api-endpoints)
-- [Contributing](#-contributing)
 - [Author](#-author)
 
 ## ✨ Features
@@ -178,6 +177,7 @@ The application will be available at `http://localhost:4200`
 ### Comments
 - `GET /data/comments` - Get all comments
 - `POST /data/comments` - Add comment
+- `PUT` /data/comments/:id - Updata comment
 - `DELETE /data/comments/:id` - Delete comment
 
 ## 👨‍💻 Author
