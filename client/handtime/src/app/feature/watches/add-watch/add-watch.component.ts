@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -14,14 +14,28 @@ import { WatchService } from 'src/app/core/watch.service';
   templateUrl: './add-watch.component.html',
   styleUrls: ['./add-watch.component.css'],
 })
-export class AddWatchComponent implements OnInit {
+export class AddWatchComponent implements OnInit, AfterViewInit {
+  @ViewChild('addWatchForm') addWatchForm!: NgForm;
+
   faExclamationTriangle = faExclamationTriangle;
   errorMessage: string = '';
+  formStatus: string = '';
 
   constructor(private titleService: Title, private watchService: WatchService, private router: Router) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Add New Watch Page');
+  }
+
+  ngAfterViewInit(): void {
+    this.addWatchForm.statusChanges?.subscribe((status) => {
+      // Only apply status classes if the form has been touched
+      if (this.addWatchForm.touched || this.addWatchForm.dirty) {
+        this.formStatus = status;
+      } else {
+        this.formStatus = '';
+      }
+    });
   }
 
   onAddWatch(addWatchForm: NgForm) {

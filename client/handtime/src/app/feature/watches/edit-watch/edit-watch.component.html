@@ -1,5 +1,5 @@
 <div class="watch-edit-container">
-  <div class="wrapper">
+  <div class="wrapper" [ngClass]="formStatus">
     <form #editWatchForm="ngForm" (ngSubmit)="editWatch(editWatchForm)">
       <h1>Edit watch</h1>
       <div class="input-box">

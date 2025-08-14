@@ -14,7 +14,7 @@ import { WatchService } from 'src/app/core/watch.service';
   templateUrl: './edit-watch.component.html',
   styleUrls: ['./edit-watch.component.css']
 })
-export class EditWatchComponent implements OnInit {
+export class EditWatchComponent implements OnInit, AfterViewInit {
   @ViewChild('editWatchForm') editWatchForm!: NgForm;
 
   faExclamationTriangle = faExclamationTriangle;
@@ -22,6 +22,7 @@ export class EditWatchComponent implements OnInit {
   isModalOpen: boolean = false;
   pendingEditData: any = null;
   selectedWatch: IWatch | null = null;
+  formStatus: string = '';
 
   constructor(private titleService: Title,
     private watchService: WatchService,
@@ -45,6 +46,12 @@ export class EditWatchComponent implements OnInit {
         summary: watch.summary
       });
     })
+  }
+
+  ngAfterViewInit(): void {
+    this.editWatchForm.statusChanges?.subscribe((status) => {
+        this.formStatus = status;
+    });
   }
 
   editWatch(editWatchForm: NgForm): void {

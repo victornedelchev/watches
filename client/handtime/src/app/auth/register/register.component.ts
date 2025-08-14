@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
   showPassword: boolean = false;
   showRePassword: boolean = false;
   errorMessage: string = '';
+  formStatus: string = '';
 
   passwordControl = new FormControl('', [
     Validators.required,
@@ -68,6 +69,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');
+
+    this.registerFormGroup.statusChanges.subscribe((status) => {
+      this.formStatus = status;
+    })
   }
 
   viewPass(): void {

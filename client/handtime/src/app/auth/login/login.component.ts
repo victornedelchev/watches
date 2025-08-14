@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
   showPassword = false;
   errorMessage: string = '';
+  formStatus: string = '';
 
   loginFormGroup: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required]),
@@ -45,6 +46,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Login Page');
+    
+    this.loginFormGroup.statusChanges.subscribe((status) => {
+      this.formStatus = status;
+    })
   }
 
   loginHandler(): void {

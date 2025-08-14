@@ -1,5 +1,5 @@
 <div class="watch-add-container">
-  <div class="wrapper">
+  <div class="wrapper" [ngClass]="formStatus">
     <form #addWatchForm="ngForm" (ngSubmit)="onAddWatch(addWatchForm)">
       <h1>Add new watch</h1>
       <div class="input-box">
