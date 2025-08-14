@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Login Page');
@@ -49,7 +49,16 @@ export class LoginComponent implements OnInit {
 
   loginHandler(): void {
     this.errorMessage = '';
-    this.userService.login$(this.loginFormGroup.value).subscribe({
+
+    const { email, password } = this.loginFormGroup.value;
+
+    const body = {
+      email: email.trim(),
+      password: password.trim(),
+    }
+
+
+    this.userService.login$({ email: body.email, password: body.password }).subscribe({
       next: () => {
         this.router.navigate(['/watches']);
       },
