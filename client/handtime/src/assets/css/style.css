@@ -682,6 +682,13 @@ like-count {
   align-items: center;
 }
 
+.server-error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
 .product_section
   .product_container
   .box

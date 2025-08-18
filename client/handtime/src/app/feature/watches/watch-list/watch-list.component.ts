@@ -13,6 +13,7 @@ export class WatchListComponent implements OnInit {
   latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
   searchByWatchNameText: string = '';
+  errorMessage: string = '';
 
   onSearchInput(searchValue: string): void {
     this.searchByWatchNameText = searchValue;
@@ -42,6 +43,7 @@ export class WatchListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
+        this.errorMessage = err.error.message || 'Error loading watches';
         this.isLoading = false;
         console.error('Error loading watches', err);
       },

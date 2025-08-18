@@ -24,5 +24,11 @@
         <p class="no-watches">No watches added yet!</p>
       </div>
     </div>
+
+    <div *ngIf="errorMessage">
+      <div class="product_container">
+        <p class="server-error-message">{{ errorMessage }}</p>
+      </div>
+    </div>
   </div>
 </section>
