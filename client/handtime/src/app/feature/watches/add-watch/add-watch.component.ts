@@ -29,7 +29,6 @@ export class AddWatchComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.addWatchForm.statusChanges?.subscribe((status) => {
-      // Only apply status classes if the form has been touched
       if (this.addWatchForm.touched || this.addWatchForm.dirty) {
         this.formStatus = status;
       } else {

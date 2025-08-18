@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');

@@ -17,8 +17,8 @@ export class NewArrivalsComponent implements OnInit {
     this.titleService.setTitle('New Arrivals Page');
     this.watchService.loadLastWatchList$().subscribe({
       next: (data) => {
-        this.isLoading = false;
         this.latestWatchList = data;
+        this.isLoading = false;
       },
       error: (err) => {
         this.isLoading = false;

@@ -75,8 +75,8 @@ export class WatchDetailsComponent implements OnInit {
   private loadWatchAndComments(): void {
     this.watchService.loadWatchById$(this.watchId).subscribe({
       next: (data: IWatch) => {
-        this.isLoading = false;
         this.watch = data;
+        this.isLoading = false;
         this.isOwner = this.currentUser?._id === this.watch._ownerId;
       },
       error: (err) => {
@@ -87,8 +87,8 @@ export class WatchDetailsComponent implements OnInit {
 
     this.commentService.getAllComments$(this.watchId).subscribe({
       next: (data: IComment[]) => {
-        this.isLoading = false;
         this.comments = data;
+        this.isLoading = false;
       },
       error: (err) => {
         this.errorMessage = err;

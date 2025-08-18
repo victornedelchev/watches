@@ -38,8 +38,8 @@ export class WatchListComponent implements OnInit {
 
     this.watchService.loadWatchList$().subscribe({
       next: (data: IWatch[]) => {
-        this.isLoading = false;
         this.watchList = data;
+        this.isLoading = false;
       },
       error: (err) => {
         this.isLoading = false;
