@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 import { IWatch } from 'src/app/core/interfaces/watch';
 import { WatchService } from 'src/app/core/watch.service';
 
@@ -14,6 +17,7 @@ export class WatchListComponent implements OnInit {
   isLoading: boolean = true;
   searchByWatchNameText: string = '';
   errorMessage: string = '';
+  faExclamationTriangle = faExclamationTriangle
 
   onSearchInput(searchValue: string): void {
     this.searchByWatchNameText = searchValue;

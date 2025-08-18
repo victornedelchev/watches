@@ -159,7 +159,6 @@ export class WatchDetailsComponent implements OnInit {
   saveEditComment(commentId: string): void {
     this.errorMessage = '';
     this.commentService.editCommentById$(this.watchId, commentId, this.editCommentText).subscribe({
-
       next: (updatedComment: IComment) => {
         const index = this.comments.findIndex(comment => comment._id === commentId);
         if (index !== -1) {
@@ -174,12 +173,14 @@ export class WatchDetailsComponent implements OnInit {
           if (updatedComment.comment) {
             updatedCommentData.comment = updatedComment.comment;
           }
+
           if (updatedComment._updatedOn) {
             updatedCommentData._updatedOn = updatedComment._updatedOn;
           }
 
           this.comments[index] = updatedCommentData;
         }
+        
         this.editingCommentId = '';
         this.editCommentText = '';
         this.isEditMode = false;

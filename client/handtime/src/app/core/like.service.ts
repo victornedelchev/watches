@@ -19,8 +19,8 @@ export class LikeService {
     return this.http.post<ILike>(`${this.BASE_LIKE_URL}`, { watchId });
   }
 
-  unlikeWatch$(watchId: string): Observable<void> {
-    return this.http.delete<void>(`${this.BASE_LIKE_URL}/${watchId}`);
+  unlikeWatch$(likeId: string): Observable<void> {
+    return this.http.delete<void>(`${this.BASE_LIKE_URL}/${likeId}`);
   }
 
   getAllLikes$(watchId: string): Observable<ILike[]>{

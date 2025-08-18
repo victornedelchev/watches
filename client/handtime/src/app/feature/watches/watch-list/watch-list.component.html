@@ -19,7 +19,7 @@
       ></app-watch-list-item>
     </div>
 
-    <div *ngIf="watchList.length === 0">
+    <div *ngIf="watchList.length === 0 && !errorMessage">
       <div class="product_container">
         <p class="no-watches">No watches added yet!</p>
       </div>
@@ -27,7 +27,9 @@
 
     <div *ngIf="errorMessage">
       <div class="product_container">
-        <p class="server-error-message">{{ errorMessage }}</p>
+        <p class="server-error-message">
+          {{ errorMessage }} <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
       </div>
     </div>
   </div>
