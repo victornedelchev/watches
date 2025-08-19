@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -13,13 +13,14 @@ import { WatchService } from 'src/app/core/watch.service';
   templateUrl: './watch-list.component.html',
   styleUrls: ['./watch-list.component.css'],
 })
-export class WatchListComponent implements OnInit {
+export class WatchListComponent implements OnInit, OnDestroy {
   watchList: IWatch[] = [];
   latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
   searchByWatchNameText: string = '';
   errorMessage: string = '';
-  faExclamationTriangle = faExclamationTriangle
+  private intervalId: any;
+  faExclamationTriangle = faExclamationTriangle;
 
   onSearchInput(searchValue: string): void {
     this.searchByWatchNameText = searchValue;
@@ -52,15 +53,25 @@ export class WatchListComponent implements OnInit {
       },
       error: (err) => {
         if (err.status === 403) {
-          this.userService.logout$().subscribe(() => {
-            this.router.navigate(['/user/login']);
-          });
+          this.errorMessage = err.error.message || 'Error loading watches';
+          this.intervalId = setInterval(() => {
+            this.userService.logout$().subscribe(() => {
+              this.router.navigate(['/user/login']);
+            });
+          }, 2500);
+
         }
-        
+
         this.errorMessage = err.error.message || 'Error loading watches';
         this.isLoading = false;
         console.error('Error loading watches', err);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
