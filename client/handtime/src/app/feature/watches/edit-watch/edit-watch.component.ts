@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import {
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import { IWatch } from 'src/app/core/interfaces/watch';
+import { UserService } from 'src/app/core/user.service';
 import { WatchService } from 'src/app/core/watch.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { WatchService } from 'src/app/core/watch.service';
   templateUrl: './edit-watch.component.html',
   styleUrls: ['./edit-watch.component.css']
 })
-export class EditWatchComponent implements OnInit, AfterViewInit {
+export class EditWatchComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('editWatchForm') editWatchForm!: NgForm;
 
   faExclamationTriangle = faExclamationTriangle;
@@ -23,9 +24,11 @@ export class EditWatchComponent implements OnInit, AfterViewInit {
   pendingEditData: any = null;
   selectedWatch: IWatch | null = null;
   formStatus: string = '';
+  private intervalId: any;
 
   constructor(private titleService: Title,
     private watchService: WatchService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -37,20 +40,32 @@ export class EditWatchComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.titleService.setTitle('Edit Watch Page');
 
-    this.watchService.loadWatchById$(this.watchId).subscribe((watch: IWatch) => {
-      this.editWatchForm.form.patchValue({
-        brand: watch.brand,
-        model: watch.model,
-        price: watch.price,
-        imageUrl: watch.imageUrl,
-        summary: watch.summary
-      });
+    this.watchService.loadWatchById$(this.watchId).subscribe({
+      next: (watch: IWatch) => {
+        this.editWatchForm.form.patchValue({
+          brand: watch.brand,
+          model: watch.model,
+          price: watch.price,
+          imageUrl: watch.imageUrl,
+          summary: watch.summary
+        });
+      },
+      error: (err) => {
+        if (err.status === 403) {
+          this.errorMessage = err.error.message || 'Error loading watch details';
+          this.intervalId = setInterval(() => {
+            this.userService.logout$().subscribe(() => {
+              this.router.navigate(['/user/login']);
+            });
+          }, 2500);
+        }
+      }
     })
   }
 
   ngAfterViewInit(): void {
     this.editWatchForm.statusChanges?.subscribe((status) => {
-        this.formStatus = status;
+      this.formStatus = status;
     });
   }
 
@@ -84,5 +99,11 @@ export class EditWatchComponent implements OnInit, AfterViewInit {
     this.isModalOpen = false;
     this.pendingEditData = null;
     this.selectedWatch = null;
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
