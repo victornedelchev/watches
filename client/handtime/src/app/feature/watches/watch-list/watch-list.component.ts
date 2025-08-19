@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 import { IWatch } from 'src/app/core/interfaces/watch';
+import { UserService } from 'src/app/core/user.service';
 import { WatchService } from 'src/app/core/watch.service';
 
 @Component({
@@ -35,7 +37,9 @@ export class WatchListComponent implements OnInit {
 
   constructor(
     private titleService: Title,
-    private watchService: WatchService
+    private watchService: WatchService,
+    private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +51,12 @@ export class WatchListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
+        if (err.status === 403) {
+          this.userService.logout$().subscribe(() => {
+            this.router.navigate(['/user/login']);
+          });
+        }
+        
         this.errorMessage = err.error.message || 'Error loading watches';
         this.isLoading = false;
         console.error('Error loading watches', err);

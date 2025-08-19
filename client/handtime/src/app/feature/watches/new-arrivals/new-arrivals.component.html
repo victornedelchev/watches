@@ -13,5 +13,13 @@
       >
       </app-watch-list-item>
     </div>
+
+    <div *ngIf="errorMessage">
+      <div class="product_container">
+        <p class="server-error-message">
+          {{ errorMessage }} <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
