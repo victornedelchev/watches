@@ -72,7 +72,7 @@
     </app-delete-modal>
   </ng-container>
 
-  <div class="comments-container">
+  <div class="comments-container" *ngIf="!!watch">
     <h3>Comments</h3>
 
     <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
@@ -191,4 +191,12 @@
     (cancel)="closeCommentDeleteModal()"
   >
   </app-comment-delete-modal>
+
+  <div *ngIf="errorMessage">
+    <div class="product_container">
+      <p class="server-error-message">
+        {{ errorMessage }} <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+      </p>
+    </div>
+  </div>
 </div>

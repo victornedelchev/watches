@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { LikeService } from 'src/app/core/like.service';
   templateUrl: './watch-details.component.html',
   styleUrls: ['./watch-details.component.css'],
 })
-export class WatchDetailsComponent implements OnInit {
+export class WatchDetailsComponent implements OnInit, OnDestroy {
   watch!: IWatch;
   currentUser: IUser | null = this.userService.getCurrentUser();
   isLoading: boolean = true;
@@ -33,7 +33,8 @@ export class WatchDetailsComponent implements OnInit {
   editingCommentId: string = '';
   editCommentText: string = '';
   isEditMode: boolean = false;
-  faExclamationTriangle = faExclamationTriangle
+  faExclamationTriangle = faExclamationTriangle;
+  intervalId: any;
 
   constructor(
     private titleService: Title,
@@ -72,6 +73,12 @@ export class WatchDetailsComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
   private loadWatchAndComments(): void {
     this.watchService.loadWatchById$(this.watchId).subscribe({
       next: (data: IWatch) => {
@@ -80,6 +87,15 @@ export class WatchDetailsComponent implements OnInit {
         this.isOwner = this.currentUser?._id === this.watch._ownerId;
       },
       error: (err) => {
+        if (err.status === 403) {
+          this.errorMessage = err.error.message
+          this.intervalId = setInterval(() => {
+            this.userService.logout$().subscribe(() => {
+              this.router.navigate(['/user/login']);
+            });
+          }, 2500)
+        }
+
         this.isLoading = false;
         console.error('Error loading watch', err);
       },
@@ -91,8 +107,8 @@ export class WatchDetailsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessage = err;
-        console.error(err);
+        this.errorMessage = err.error.message;
+        console.error('Error loading comments', err);
       }
     });
   }
@@ -180,7 +196,7 @@ export class WatchDetailsComponent implements OnInit {
 
           this.comments[index] = updatedCommentData;
         }
-        
+
         this.editingCommentId = '';
         this.editCommentText = '';
         this.isEditMode = false;
