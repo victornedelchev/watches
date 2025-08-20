@@ -1,4 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
 import { WeatherService } from '../../weather.service';
 import { IWeather } from '../../interfaces/weather';
 
@@ -33,6 +36,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   isHot: boolean = false;
   weatherInterval: any;
   minute: number = 60 * 1000;
+  getWeatherSub!:Subscription;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -44,7 +48,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   };
 
   getWeather(): void {
-    this.weatherService.getWeather$().subscribe({
+    this.getWeatherSub = this.weatherService.getWeather$().subscribe({
       next: (data: IWeather) => {
         this.isLoading = false;
         this.weatherInfo = data;
@@ -67,5 +71,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
     if (this.weatherInterval) {
       clearInterval(this.weatherInterval);
     }
+
+    this.getWeatherSub.unsubscribe();
   }
 }
