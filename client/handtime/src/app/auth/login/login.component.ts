@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/core/user.service';
+
+import { Subscription } from 'rxjs';
+
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {
   faExclamationTriangle,
@@ -15,12 +17,14 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { UserService } from 'src/app/core/user.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   faEnvelope = faEnvelope;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
@@ -28,6 +32,8 @@ export class LoginComponent implements OnInit {
   showPassword = false;
   errorMessage: string = '';
   formStatus: string = '';
+  statusChangeSub!: Subscription;
+  loginSub!: Subscription;
 
   loginFormGroup: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required]),
@@ -46,8 +52,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Login Page');
-    
-    this.loginFormGroup.statusChanges.subscribe((status) => {
+
+    this.statusChangeSub = this.loginFormGroup.statusChanges.subscribe((status) => {
       this.formStatus = status;
     })
   }
@@ -63,7 +69,7 @@ export class LoginComponent implements OnInit {
     }
 
 
-    this.userService.login$({ email: body.email, password: body.password }).subscribe({
+    this.loginSub = this.userService.login$({ email: body.email, password: body.password }).subscribe({
       next: () => {
         this.router.navigate(['/watches']);
       },
@@ -75,5 +81,10 @@ export class LoginComponent implements OnInit {
 
   viewPass(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  ngOnDestroy(): void {
+    this.statusChangeSub.unsubscribe();
+    this.loginSub.unsubscribe();
   }
 }

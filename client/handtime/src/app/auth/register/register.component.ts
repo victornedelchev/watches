@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,6 +8,8 @@ import {
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import { Subscription } from 'rxjs';
+
 import {
   faExclamationTriangle,
   faUser,
@@ -16,6 +18,7 @@ import {
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import { noSpaceAllowed, passwordMismatch } from '../utils';
 import { UserService } from 'src/app/core/user.service';
 
@@ -24,7 +27,7 @@ import { UserService } from 'src/app/core/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   faUser = faUser;
   faExclamationTriangle = faExclamationTriangle;
   faEnvelope = faEnvelope;
@@ -34,6 +37,8 @@ export class RegisterComponent implements OnInit {
   showRePassword: boolean = false;
   errorMessage: string = '';
   formStatus: string = '';
+  statusChangeSub!: Subscription;
+  registerSub!: Subscription;
 
   passwordControl = new FormControl('', [
     Validators.required,
@@ -70,7 +75,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');
 
-    this.registerFormGroup.statusChanges.subscribe((status) => {
+    this.statusChangeSub = this.registerFormGroup.statusChanges.subscribe((status) => {
       this.formStatus = status;
     })
   }
@@ -94,7 +99,7 @@ export class RegisterComponent implements OnInit {
       password: passwords.password,
     };
 
-    this.userService.register$(body).subscribe({
+    this.registerSub = this.userService.register$(body).subscribe({
       next: (response) => {
         if (response.accessToken) {
           this.router.navigate(['/watches']);
@@ -113,5 +118,10 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.statusChangeSub.unsubscribe();
+    this.registerSub.unsubscribe();
   }
 }
