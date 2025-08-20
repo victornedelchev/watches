@@ -1,8 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-
-import { Subscription } from 'rxjs';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -10,12 +14,6 @@ import {
   faEye,
 } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 
 import { UserService } from 'src/app/core/user.service';
 
@@ -24,7 +22,7 @@ import { UserService } from 'src/app/core/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   faEnvelope = faEnvelope;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
@@ -32,8 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   showPassword = false;
   errorMessage: string = '';
   formStatus: string = '';
-  statusChangeSub!: Subscription;
-  loginSub!: Subscription;
 
   loginFormGroup: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required]),
@@ -53,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.titleService.setTitle('Login Page');
 
-    this.statusChangeSub = this.loginFormGroup.statusChanges.subscribe((status) => {
+   this.loginFormGroup.statusChanges.subscribe((status) => {
       this.formStatus = status;
     })
   }
@@ -69,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
 
-    this.loginSub = this.userService.login$({ email: body.email, password: body.password }).subscribe({
+    this.userService.login$({ email: body.email, password: body.password }).subscribe({
       next: () => {
         this.router.navigate(['/watches']);
       },
@@ -81,10 +77,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   viewPass(): void {
     this.showPassword = !this.showPassword;
-  }
-
-  ngOnDestroy(): void {
-    this.statusChangeSub.unsubscribe();
-    this.loginSub.unsubscribe();
   }
 }

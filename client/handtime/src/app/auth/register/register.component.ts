@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,7 +8,6 @@ import {
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
 
 import {
   faExclamationTriangle,
@@ -27,7 +26,7 @@ import { UserService } from 'src/app/core/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit {
   faUser = faUser;
   faExclamationTriangle = faExclamationTriangle;
   faEnvelope = faEnvelope;
@@ -37,8 +36,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   showRePassword: boolean = false;
   errorMessage: string = '';
   formStatus: string = '';
-  statusChangeSub!: Subscription;
-  registerSub!: Subscription;
 
   passwordControl = new FormControl('', [
     Validators.required,
@@ -75,7 +72,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.titleService.setTitle('Register Page');
 
-    this.statusChangeSub = this.registerFormGroup.statusChanges.subscribe((status) => {
+    this.registerFormGroup.statusChanges.subscribe((status) => {
       this.formStatus = status;
     })
   }
@@ -99,7 +96,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: passwords.password,
     };
 
-    this.registerSub = this.userService.register$(body).subscribe({
+    this.userService.register$(body).subscribe({
       next: (response) => {
         if (response.accessToken) {
           this.router.navigate(['/watches']);
@@ -118,10 +115,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.statusChangeSub.unsubscribe();
-    this.registerSub.unsubscribe();
   }
 }

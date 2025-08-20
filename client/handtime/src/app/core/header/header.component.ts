@@ -1,8 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
-
 import { UserService } from '../user.service';
 import { IUser } from '../interfaces/user';
 
@@ -11,10 +9,8 @@ import { IUser } from '../interfaces/user';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent {
   currentUser: IUser | null = null;
-  logoutSub!: Subscription;
-
   get isLogged(): boolean {
     return this.userService.isLoggedIn();
   }
@@ -24,13 +20,9 @@ export class HeaderComponent implements OnDestroy {
   }
 
   logoutHandler(): void {
-    this.logoutSub = this.userService.logout$().subscribe({
+    this.userService.logout$().subscribe({
       next: () => this.router.navigate(['/watches']),
       error: (err) => console.error(err),
     });
-  }
-
-  ngOnDestroy(): void {
-    this.logoutSub.unsubscribe();
   }
 }

@@ -2,8 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
-
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 import { IUser } from 'src/app/core/interfaces/user';
@@ -22,7 +20,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   faExclamationTriangle = faExclamationTriangle;
   intervalId: any;
-  loadWatchListSub!: Subscription;
 
   get currentUser(): IUser | null {
     return this.userService.getCurrentUser();
@@ -38,7 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.titleService.setTitle('Profile Page');
 
-    this.loadWatchListSub = this.watchService.loadWatchList$().subscribe({
+    this.watchService.loadWatchList$().subscribe({
       next: (data: IWatch[]) => {
         this.userWatchList = data.filter(watch => watch._ownerId === this.currentUser?._id);
         this.isLoading = false;
@@ -64,7 +61,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-
-    this.loadWatchListSub.unsubscribe()
   }
 }

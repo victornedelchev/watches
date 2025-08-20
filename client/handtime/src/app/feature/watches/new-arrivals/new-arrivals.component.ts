@@ -28,7 +28,8 @@ export class NewArrivalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.titleService.setTitle('New Arrivals Page');
-    this.watchService.loadLastWatchList$().subscribe({
+
+   this.watchService.loadLastWatchList$().subscribe({
       next: (data) => {
         this.latestWatchList = data;
         this.isLoading = false;
