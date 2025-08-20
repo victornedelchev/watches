@@ -314,6 +314,7 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
+  text-decoration: none;
 }
 
 .slider_section .detail-box .btn-box .btn1:hover {
@@ -329,6 +330,7 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
+  text-decoration: none;
 }
 
 .slider_section .detail-box .btn-box .btn2:hover {

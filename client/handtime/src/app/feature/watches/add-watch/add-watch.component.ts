@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import {
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
-
 import { IWatch } from 'src/app/core/interfaces/watch';
 import { UserService } from 'src/app/core/user.service';
 import { WatchService } from 'src/app/core/watch.service';

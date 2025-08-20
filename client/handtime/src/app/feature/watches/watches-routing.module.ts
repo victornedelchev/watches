@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { WatchListComponent } from './watch-list/watch-list.component';
 import { WatchDetailsComponent } from './watch-details/watch-details.component';
 import { AddWatchComponent } from './add-watch/add-watch.component';
