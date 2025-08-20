@@ -3,6 +3,7 @@ export const environment = {
   API_URL: 'http://localhost:3030/users',
   BASE_COMMENTS_URL: 'http://localhost:3030/data/comments',
   BASE_LIKE_URL: 'http://localhost:3030/data/likes',
-  SORTING_STRING: "?sortBy=_createdOn%20desc&pageSize=5",
+  SORTING_STRING_5: "?sortBy=_createdOn%20desc&pageSize=5",
+  SORTING_STRING_2: "?sortBy=_createdOn%20desc&pageSize=2",
   WEATHER_API_KEY: `1c9ba1949f83dcdb7e6e7b549ca3e1e9`,
 };

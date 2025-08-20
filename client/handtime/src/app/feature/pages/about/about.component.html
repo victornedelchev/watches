@@ -2,16 +2,27 @@
   <section class="about_section layout_padding">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="!isLoading">
           <div class="img_container">
-            <div class="img-box b1">
-              <img src="assets/images/a-1.jpg" alt="" />
-            </div>
-            <div class="img-box b2">
-              <img src="assets/images/a-2.jpg" alt="" />
+            <div class="img-box b1" *ngFor="let watch of latestTwoWatchList">
+              <img class="watch-image"
+                src="{{ watch.imageUrl }}"
+                alt="{{ watch.brand }} {{ watch.model }}"
+              />
             </div>
           </div>
         </div>
+
+        <app-loader *ngIf="isLoading"></app-loader>
+
+        <div *ngIf="errorMessage">
+          <div class="product_container">
+            <p class="server-error-message">
+              {{ errorMessage }} <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+            </p>
+          </div>
+        </div>
+
         <div class="col-md-6">
           <div class="detail-box">
             <h2>About This App</h2>

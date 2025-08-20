@@ -510,6 +510,7 @@ like-count {
   width: 100%;
   position: relative;
   z-index: 2;
+  width: 350px;
 }
 
 .about_section .img_container .img-box::before {

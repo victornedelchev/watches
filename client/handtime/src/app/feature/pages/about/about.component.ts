@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
+import { Loader } from '@googlemaps/js-api-loader';
+
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 import description from '../../../constants/description';
-import { Loader } from '@googlemaps/js-api-loader';
+import { WatchService } from 'src/app/core/watch.service';
+import { IWatch } from 'src/app/core/interfaces/watch';
+import { UserService } from 'src/app/core/user.service';
 
 declare const google: any;
 @Component({
@@ -11,10 +18,21 @@ declare const google: any;
   styleUrls: ['./about.component.css'],
 })
 
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
   readMore: boolean = true;
   description = description;
-  constructor(private titleService: Title) { }
+  latestTwoWatchList: IWatch[] = [];
+  isLoading: boolean = true;
+  errorMessage: string = '';
+  private intervalId: any;
+  faExclamationTriangle = faExclamationTriangle
+
+  constructor(
+    private titleService: Title,
+    private watchService: WatchService,
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('About Page');
@@ -22,6 +40,26 @@ export class AboutComponent implements OnInit {
     let loader = new Loader({
       apiKey: 'AIzaSyBVi7HNr2M81GiZWLOSFrVu43TCkN9MGbI',
     });
+
+    this.watchService.loadLastTwoWatchList$().subscribe({
+      next: (data: IWatch[]) => {
+        this.latestTwoWatchList = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        if (err.status === 403) {
+          this.intervalId = setInterval(() => {
+            this.userService.logout$().subscribe(() => {
+              this.router.navigate(['/user/login']);
+            });
+          }, 2500);
+        }
+       
+        this.isLoading = false;
+        this.errorMessage = err.error.message || 'Error loading watches';
+        console.error('Error loading watches', err);
+      }
+    })
 
     loader.load().then(() => {
       const map = new google.maps.Map(document.getElementById('map'), {
@@ -272,5 +310,11 @@ export class AboutComponent implements OnInit {
 
   toggleReadMore(): void {
     this.readMore = !this.readMore;
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
