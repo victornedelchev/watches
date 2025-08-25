@@ -15,7 +15,6 @@ import { WatchService } from 'src/app/core/watch.service';
 })
 export class WatchListComponent implements OnInit, OnDestroy {
   watchList: IWatch[] = [];
-  latestWatchList: IWatch[] = [];
   isLoading: boolean = true;
   searchByWatchNameText: string = '';
   errorMessage: string = '';

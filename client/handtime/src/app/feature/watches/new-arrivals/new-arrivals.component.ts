@@ -40,7 +40,7 @@ export class NewArrivalsComponent implements OnInit, OnDestroy {
             this.userService.logout$().subscribe(() => {
               this.router.navigate(['/user/login']);
             });
-          }, 2000);
+          }, 2500);
         }
 
         this.isLoading = false;

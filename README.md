@@ -142,7 +142,7 @@ The application will be available at `http://localhost:4200`
 ### Getting Started
 
 1. **Register/Login**: Create an account or log in to access full features
-2. **Browse Watches**: View the watch collection on the home page
+2. **Browse Watches**: View the watch collection on the products page
 3. **Add Watches**: Use the "Add Watch" feature to contribute to the collection
 4. **Interact**: Like watches, add comments, and explore details
 5. **Weather**: Check current weather conditions
