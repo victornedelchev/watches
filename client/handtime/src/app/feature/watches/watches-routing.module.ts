@@ -7,6 +7,7 @@ import { AddWatchComponent } from './add-watch/add-watch.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guards';
 import { EditWatchComponent } from './edit-watch/edit-watch.component';
 import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
+import { NotFoundComponent } from '../pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: WatchListComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     component: EditWatchComponent,
     canActivate: [AuthGuard]
   },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
